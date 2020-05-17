@@ -1,0 +1,6 @@
+5/4/2020:
+I think there is enough data in the database to start working on
+the scripts.  Probably starting with getdata.php.  Then work on the
+makebid.php.  Finally, working on the event.php.
+
+
