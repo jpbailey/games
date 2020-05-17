@@ -4,6 +4,11 @@
 </head>
 
 <?php
+// this is the main login page
+// we need to authenticate the user and know whether
+// this person is an adminstrator, a venture capitalist,
+// or a startup
+
 
 // bring in the data passed by the url
 $event=htmlspecialchars($_GET["event"]);
