@@ -15,8 +15,14 @@ require ('./environment.php');
 
 // bring in variables
 require ('./variables.php');
-$id = substr(key($_POST),6)+0;
-$action = substr(key($_POST),0,6);
+
+if ($_POST['action']=='submit new bid') {
+	$action="newbid";
+} else {
+	$id = substr(key($_POST),6)+0;
+	$action = substr(key($_POST),0,6);
+}
+
 $role=htmlspecialchars($_POST['role']);
 $remaining=htmlspecialchars($_POST['remaining']);
 
@@ -26,9 +32,11 @@ require ('./database.php');
 // use the database to bring in the values associated with the
 // current bid information
 
-$sql = "SELECT * FROM bid WHERE id=$id;";
-$bid_query = $mysqli->query($sql);
-$bid_row=$bid_query->fetch_assoc();
+if ($action!="newbid") {
+	$sql = "SELECT * FROM bid WHERE id=$id;";
+	$bid_query = $mysqli->query($sql);
+	$bid_row=$bid_query->fetch_assoc();
+}
 
 if ($action=="submit"){
 	$sql = "SELECT investment FROM bid WHERE id=".$id;
@@ -112,6 +120,23 @@ if ($action=="submit"){
 	echo "<input type='hidden' name='id' value=$id>";
 	require ('./sendvars.php');
 	echo "</form>\n";
+} elseif ($action=="newbid") {
+//	echo "this is close to working... 5/22/2020";
+//	echo "ready to process this new bid";
+	$sql_part1 = "INSERT INTO bid (event_name, vc_name, startup_name, ";
+	$sql_part2 = "price, investment, submitted, accepted, rejected, ";
+	$sql_part3 = "counter) VALUES ('".$event."', '".$user."', '";
+	$sql_part4 = $_POST['startup']."', ".$_POST['price'].", ";
+	$sql_part5 = $_POST['investment'].", 1, 0, 0, 0)";
+	$sql=$sql_part1.$sql_part2.$sql_part3.$sql_part4.$sql_part5;
+	$mysqli->query($sql);
+	echo "<form action='".$role.".php' method='POST'>";
+	echo "<input type=submit name='review_bids' value='review bids'>";
+	require ('./sendvars.php');
+	echo "</form>\n";
+
+} else {
+	echo "unknown action";
 }
 
 ?>

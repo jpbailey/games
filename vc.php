@@ -135,7 +135,40 @@ echo "</form>\n";
 // get all of the startups in a list
 // move them over to savebid.php
 
+echo "<h2>Make a new offer</h2>";
+
+echo "<form action='editbid.php' method='POST'>";
+echo "<table id='gamedata'>";
+echo "<tr><th>parameter</th><th>value</th></tr>\n";
+echo "<tr><td>Startup</td><td>";
+$sql = "SELECT DISTINCT startup_name FROM bid WHERE event_name='".$event."'";
+$startup_query = $mysqli->query($sql);
+
+while ($row=$startup_query->fetch_assoc()) {
+	echo "<input type='radio' id='".$row['startup_name']."' ";
+	echo "name='startup' value='".$row['startup_name']."'>";
+	echo "<label for='".$row['startup_name']."'";
+	echo ">".$row['startup_name']."</label><br>";
+}
+
+echo "</td></tr>";
+echo "<tr><td>price</td><td>";
+echo "<input type=number name='price' value='0'>";
+echo "</td></tr>";
+echo "<tr><td>investment</td><td>";
+echo "<input type=number name='investment' value='0'></td></tr>";
+echo "</table>";
+
+echo "<td><input type='submit' name='action' value='submit new bid'>\n";
+
+require ('./sendvars.php');
+echo "<input type='hidden' name='role' value='vc'>\n";
+echo "<input type='hidden' name='remaining' value=".$remaining.">\n";
+echo "</form>\n";
+
 require('./dashboard.php');
+
+
 
 ?>
 
