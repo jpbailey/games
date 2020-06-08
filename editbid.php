@@ -49,8 +49,8 @@ if ($action=="submit"){
 		$sql = "UPDATE bid SET submitted=1 WHERE id=".$id;
 		$mysqli->query($sql);
 	} else {
-		echo "Sorry, cannot submit this bid since you do
-			no have the budget.</br>";
+		echo "Sorry, you cannot submit this bid since you do
+			not have the budget.</br>";
 	}
 	echo "<form action='".$role.".php' method='POST'>";
 	echo "<input type=submit name='review_bids' value='review bids'>";
@@ -90,13 +90,41 @@ if ($action=="submit"){
 	require ('./sendvars.php');
 	echo "</form>\n";
 } elseif ($action == "accept") {
-	$sql = "SELECT investment FROM bid WHERE id=".$id;
+	$sql = "SELECT startup_name, vc_name, investment FROM bid WHERE id=".$id;
 	$result=$mysqli->query($sql);
 	$row=$result->fetch_assoc();
 	if ($row['investment']<=$remaining) {
-		echo "Accepting this bid.<br>";
-		$sql = "UPDATE bid SET accepted=1 WHERE id=".$id;
-		$mysqli->query($sql);
+		if ($role=="vc") {
+			$sql = "SELECT startup_budget FROM event WHERE name = '".$event."'";
+			$budget_query = $mysqli->query($sql);
+			$budget_result = $budget_query->fetch_assoc();
+			$sql = "SELECT SUM(investment) FROM bid WHERE startup_name = '".$row['startup_name']."' AND accepted=1";
+			$sql_query = $mysqli->query($sql);
+			$sql_result=$sql_query->fetch_assoc();
+			$caproom = $budget_result['startup_budget']-$sql_result['SUM(investment)'];
+			if ($row['investment'] <= $caproom) {
+				echo "Accepting this bid.<br>";
+				$sql = "UPDATE bid SET accepted=1 WHERE id=".$id;
+				$mysqli->query($sql);
+			} else {
+				echo "The startup cannot accept this investment; it is too much";
+			}
+		} else {
+			$sql = "SELECT vc_budget FROM event WHERE name = '".$event."'";
+			$budget_query = $mysqli->query($sql);
+			$budget_result = $budget_query->fetch_assoc();
+			$sql = "SELECT SUM(investment) FROM bid WHERE vc_name = '".$row['vc_name']."' AND accepted=1";
+			$sql_query = $mysqli->query($sql);
+			$sql_result=$sql_query->fetch_assoc();
+			$caproom = $budget_result['vc_budget']-$sql_result['SUM(investment)'];
+			if ($row['investment'] <= $caproom) {
+				echo "Accepting this bid.<br>";
+				$sql = "UPDATE bid SET accepted=1 WHERE id=".$id;
+				$mysqli->query($sql);
+			} else {
+				echo "The vc does not have the funds for this investment; it is too much";
+			}
+		}
 	} else {
 		echo "Sorry, cannot accept this bid since you do
 			no have the budget.</br>";
@@ -121,15 +149,19 @@ if ($action=="submit"){
 	require ('./sendvars.php');
 	echo "</form>\n";
 } elseif ($action=="newbid") {
-//	echo "this is close to working... 5/22/2020";
-//	echo "ready to process this new bid";
-	$sql_part1 = "INSERT INTO bid (event_name, vc_name, startup_name, ";
-	$sql_part2 = "price, investment, submitted, accepted, rejected, ";
-	$sql_part3 = "counter) VALUES ('".$event."', '".$user."', '";
-	$sql_part4 = $_POST['startup']."', ".$_POST['price'].", ";
-	$sql_part5 = $_POST['investment'].", 1, 0, 0, 0)";
-	$sql=$sql_part1.$sql_part2.$sql_part3.$sql_part4.$sql_part5;
-	$mysqli->query($sql);
+	if ($_POST['investment']<=$remaining) {
+		echo "Submitting this bid.<br>";
+		$sql_part1 = "INSERT INTO bid (event_name, vc_name, startup_name, ";
+		$sql_part2 = "price, investment, submitted, accepted, rejected, ";
+		$sql_part3 = "counter) VALUES ('".$event."', '".$user."', '";
+		$sql_part4 = $_POST['startup']."', ".$_POST['price'].", ";
+		$sql_part5 = $_POST['investment'].", 1, 0, 0, 0)";
+		$sql=$sql_part1.$sql_part2.$sql_part3.$sql_part4.$sql_part5;
+		$mysqli->query($sql);
+	} else {
+		echo "Sorry, cannot submit this bid since you do
+			no have the budget.</br>";
+	}
 	echo "<form action='".$role.".php' method='POST'>";
 	echo "<input type=submit name='review_bids' value='review bids'>";
 	require ('./sendvars.php');

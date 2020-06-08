@@ -75,8 +75,15 @@ if ($data->num_rows > 0) {
 	echo "<th>Investment</th><th>Status</th></tr>";
 	while ($row=$data->fetch_assoc()){
         	echo "<tr>";
-		echo "<td>" . $row['vc_name'] . "</td>";
-		echo "<td>" . $row['startup_name'] . "</td>";
+		$sql = "SELECT nickname FROM user WHERE name='".$row['vc_name']."'";
+		$sql_query = $mysqli->query($sql);
+		$sql_result = $sql_query->fetch_assoc();
+		echo "<td>" . $sql_result['nickname'] . "</td>";
+//		echo "<td>" . $row['vc_name'] . "</td>";
+		$sql = "SELECT nickname FROM user WHERE name='".$row['startup_name']."'";
+		$sql_query = $mysqli->query($sql);
+		$sql_result = $sql_query->fetch_assoc();
+		echo "<td>" . $sql_result['nickname'] . "</td>";
 		echo "<td>";
 		echo '$' . number_format($row['price'], 0);
 		echo "</td>";

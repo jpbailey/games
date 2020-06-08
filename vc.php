@@ -49,15 +49,18 @@ if ($spent=="") {
 
 $remaining = $budget-$spent;
 
-echo "Currently allocated: $".number_format($spent, 0)."<br>\n";
-echo "Total budget: $".number_format($budget, 0)."<br>\n";
-echo  "Remaining balance: $".number_format($remaining, 0).".<br>\n";
+echo "Total amount to invest: $".number_format($budget, 0)."<br>\n";
+echo "Current amount invested: $".number_format($spent, 0)."<br>\n";
+echo  "Amount remaining to invest: $".number_format($remaining, 0).".<br>\n";
 
 // this function will create one row within the table from the data
-function createRow($row) {
+function createRow($row, $mysqli) {
 	echo "<tr>\n";
 	$str_arr = explode (",", $row);
-	echo "<td>".$str_arr[1]."</td>\n";
+	$sql = "SELECT nickname FROM user WHERE name='".$str_arr[1]."'";
+	$sql_query = $mysqli->query($sql);
+	$sql_result = $sql_query->fetch_assoc();
+	echo "<td>".$sql_result['nickname']."</td>\n";
 	$id = $str_arr[0];
 	echo "<td>";
 	echo '$' . number_format($str_arr[2], 0);
@@ -122,7 +125,7 @@ if ($biddata_query->num_rows > 0) {
 
 <?php
 foreach($ARRAY as $row) {
-	createRow($row);
+	createRow($row, $mysqli);
 }
 
 echo "</table>\n";
@@ -148,7 +151,12 @@ while ($row=$startup_query->fetch_assoc()) {
 	echo "<input type='radio' id='".$row['startup_name']."' ";
 	echo "name='startup' value='".$row['startup_name']."'>";
 	echo "<label for='".$row['startup_name']."'";
-	echo ">".$row['startup_name']."</label><br>";
+	echo ">";
+	$sql = "SELECT nickname FROM user WHERE name='".$row['startup_name']."'";
+	$sql_query= $mysqli->query($sql);
+	$sql_result=$sql_query->fetch_assoc();
+	echo $sql_result['nickname'];
+	echo "</label><br>";
 }
 
 echo "</td></tr>";
@@ -166,7 +174,7 @@ echo "<input type='hidden' name='role' value='vc'>\n";
 echo "<input type='hidden' name='remaining' value=".$remaining.">\n";
 echo "</form>\n";
 
-require('./dashboard.php');
+require('./vc_dashboard.php');
 
 
 
