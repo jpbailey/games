@@ -39,7 +39,7 @@ if ($action!="newbid") {
 }
 
 function capRoom($id, $mysqli) {
-	return 1
+	return 1;
 }
 	
 if ($action=="submit"){
