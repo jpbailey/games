@@ -39,13 +39,13 @@ if ($action!="newbid") {
 }
 
 function capRoom($id, $mysqli) {
-	$sql = "SELECT vc_name, startup_name, event_name, price FROM bid where id=$id";
+	$sql = "SELECT vc_name, startup_name, event_name, investment FROM bid where id=$id";
 	$query = $mysqli->query($sql);
 	$row = $query->fetch_assoc();
 	$vc = $row['vc_name'];
 	$startup = $row['startup_name'];
 	$event = $row['event_name'];
-	$price = $row['price'];
+	$investment = $row['investment'];
 	$sql = "SELECT SUM(investment) FROM bid WHERE vc_name = '".$vc."' AND accepted=1";
 	$query = $mysqli->query($sql);
 	$row = $query->fetch_assoc();
@@ -59,9 +59,9 @@ function capRoom($id, $mysqli) {
 	$row = $query->fetch_assoc();
 	$vc_budget = $row['vc_budget'];
 	$startup_budget = $row['startup_budget'];
-	if ($vc_budget>=($vc_spent+$price) && $startup_budget>=($startup_spent+price)) {
+	if ($vc_budget>=($vc_spent+$investment) && $startup_budget>=($startup_spent+$investment)) {
 		return "okay";
-	} elseif ($vc_budget<($vc_spent+$price)) {
+	} elseif ($vc_budget<($vc_spent+$investment)) {
 		return "VC does not have enough funds";
 	} else {
 		return "Startup cannot accept an investment at this price";
