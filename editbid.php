@@ -38,6 +38,10 @@ if ($action!="newbid") {
 	$bid_row=$bid_query->fetch_assoc();
 }
 
+function capRoom($id, $mysqli) {
+	return 1
+}
+	
 if ($action=="submit"){
 	$sql = "SELECT investment FROM bid WHERE id=".$id;
 	$result=$mysqli->query($sql);
@@ -90,6 +94,11 @@ if ($action=="submit"){
 	require ('./sendvars.php');
 	echo "</form>\n";
 } elseif ($action == "accept") {
+	if (capRoom($id, $mysqli)) {
+		echo "there is cap room";
+	} else {
+		echo "there isn't cap room";
+	}
 	$sql = "SELECT startup_name, vc_name, investment FROM bid WHERE id=".$id;
 	$result=$mysqli->query($sql);
 	$row=$result->fetch_assoc();
