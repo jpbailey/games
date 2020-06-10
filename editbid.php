@@ -60,6 +60,7 @@ function capRoom($id, $mysqli) {
 	$vc_budget = $row['vc_budget'];
 	$startup_budget = $row['startup_budget'];
 	if ($vc_budget>=($vc_spent+$investment) && $startup_budget>=($startup_spent+$investment)) {
+		echo "got here";
 		return "okay";
 	} elseif ($vc_budget<($vc_spent+$investment)) {
 		return "VC does not have enough funds";
@@ -124,7 +125,8 @@ if ($action=="submit"){
 	if ($message = "okay") {
 		echo "Accepted this bid.</br>";
 		$sql = "UPDATE bid SET accepted=1 WHERE id=".$id;
-		$mysqli->query($sql);
+		echo "not really accepting the bid";
+//		$mysqli->query($sql);
 	} else {
 		echo $message;
 	}
