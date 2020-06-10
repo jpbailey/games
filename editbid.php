@@ -59,6 +59,8 @@ function capRoom($id, $mysqli) {
 	$row = $query->fetch_assoc();
 	$vc_budget = $row['vc_budget'];
 	$startup_budget = $row['startup_budget'];
+	echo "is ".$vc_budget." larger than ".($vc_spent+$investment)."<br>";
+	echo "is ".$startup_budget." larger than ".($startup_spent+$investment)."<br>";
 	if ($vc_budget>=($vc_spent+$investment) && $startup_budget>=($startup_spent+$investment)) {
 		echo "got here";
 		return "okay";
@@ -122,7 +124,7 @@ if ($action=="submit"){
 	echo "</form>\n";
 } elseif ($action == "accept") {
 	$message = capRoom($id, $mysqli);
-	if ($message = "okay") {
+	if ($message == "okay") {
 		echo "Accepted this bid.</br>";
 		$sql = "UPDATE bid SET accepted=1 WHERE id=".$id;
 		echo "not really accepting the bid";
