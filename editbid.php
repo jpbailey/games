@@ -39,6 +39,10 @@ if ($action!="newbid") {
 }
 
 function capRoom($id, $mysqli) {
+	$sql = "SELECT * FROM bid where id=".$id;
+	$bid_query = $mysqli->query($sql);
+	$bid_row = $bid_query->fetch_assoc();
+	echo $bid_row['investment'];
 	return 1;
 }
 	
