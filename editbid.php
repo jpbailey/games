@@ -59,10 +59,7 @@ function capRoom($id, $mysqli) {
 	$row = $query->fetch_assoc();
 	$vc_budget = $row['vc_budget'];
 	$startup_budget = $row['startup_budget'];
-	echo "is ".$vc_budget." larger than ".($vc_spent+$investment)."<br>";
-	echo "is ".$startup_budget." larger than ".($startup_spent+$investment)."<br>";
 	if ($vc_budget>=($vc_spent+$investment) && $startup_budget>=($startup_spent+$investment)) {
-		echo "got here";
 		return "okay";
 	} elseif ($vc_budget<($vc_spent+$investment)) {
 		return "VC does not have enough funds";
@@ -75,8 +72,6 @@ if ($action=="submit"){
 	$sql = "SELECT investment FROM bid WHERE id=".$id;
 	$result=$mysqli->query($sql);
 	$row=$result->fetch_assoc();
-//	echo "is ".$row['investment']." less than or equal to ".
-//		$remaining."?";
 	if ($row['investment']<=$remaining) {
 		echo "<h1>Successfully submitted this bid</h1>\n";
 		$sql = "UPDATE bid SET submitted=1 WHERE id=".$id;
@@ -127,8 +122,7 @@ if ($action=="submit"){
 	if ($message == "okay") {
 		echo "Accepted this bid.</br>";
 		$sql = "UPDATE bid SET accepted=1 WHERE id=".$id;
-		echo "not really accepting the bid";
-//		$mysqli->query($sql);
+		$mysqli->query($sql);
 	} else {
 		echo $message;
 	}
@@ -178,12 +172,6 @@ if ($action=="submit"){
 }
 
 ?>
-<form>
-
-
-
-</form>
-
 
 </body>
 
