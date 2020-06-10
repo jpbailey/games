@@ -59,23 +59,12 @@ function capRoom($id, $mysqli) {
 	$row = $query->fetch_assoc();
 	$vc_budget = $row['vc_budget'];
 	$startup_budget = $row['startup_budget'];
-	echo "VC: ".$vc."<br>";
-	echo "Startup: ".$startup."<br>";
-	echo "Event: ".$event."<br>";
-	echo "VC Spent: ".$vc_spent."<br>";
-	echo "Startup Spent: ".$startup_spent."<br>";
-	echo "VC Budget: ".$vc_budget."<br>";
-	echo "Startup Budget: ".$startup_budget."<br>";
-	echo "Price: ".$price."<br>";
-//	echo "</br>";
-//	echo $bid_row['investment'];
-//	use the event id from the bid row to figure out the budget for both sides
-//	figure out how much each side has spent
-//	then take a look at the bid information to see it it conforms
 	if ($vc_budget>=($vc_spent+$price) && $startup_budget>=($startup_spent+price)) {
 		return "okay";
+	} elseif ($vc_budget<($vc_spent+$price)) {
+		return "VC does not have enough funds";
 	} else {
-		return "denied";
+		return "Startup cannot accept an investment at this price";
 	}
 }
 	
@@ -132,7 +121,11 @@ if ($action=="submit"){
 	echo "</form>\n";
 } elseif ($action == "accept") {
 	$message = capRoom($id, $mysqli);
-	echo $message;
+	if ($message = "okay") {
+		echo "Accepted this bid.</br>";
+	} else {
+		echo $message;
+	}
 //	if (capRoom($id, $mysqli)) {
 //		echo "there is cap room";
 //	} else {
