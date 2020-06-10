@@ -72,7 +72,11 @@ function capRoom($id, $mysqli) {
 //	use the event id from the bid row to figure out the budget for both sides
 //	figure out how much each side has spent
 //	then take a look at the bid information to see it it conforms
-	return 1;
+	if ($vc_budget>=($vc_spent+$price) && $startup_budget>=($startup_spent+price)) {
+		return "okay";
+	} else {
+		return "denied";
+	}
 }
 	
 if ($action=="submit"){
@@ -127,11 +131,13 @@ if ($action=="submit"){
 	require ('./sendvars.php');
 	echo "</form>\n";
 } elseif ($action == "accept") {
-	if (capRoom($id, $mysqli)) {
-		echo "there is cap room";
-	} else {
-		echo "there isn't cap room";
-	}
+	$message = capRoom($id, $mysqli);
+	echo $message;
+//	if (capRoom($id, $mysqli)) {
+//		echo "there is cap room";
+//	} else {
+//		echo "there isn't cap room";
+//	}
 	$sql = "SELECT startup_name, vc_name, investment FROM bid WHERE id=".$id;
 	$result=$mysqli->query($sql);
 	$row=$result->fetch_assoc();
