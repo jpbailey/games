@@ -122,7 +122,8 @@ if ($action=="submit"){
 			if ($row['investment'] <= $caproom) {
 				echo "Accepting this bid.<br>";
 				$sql = "UPDATE bid SET accepted=1 WHERE id=".$id;
-				$mysqli->query($sql);
+				echo "not really updating this right now";
+//				$mysqli->query($sql);
 			} else {
 				echo "The startup cannot accept this investment; it is too much";
 			}
