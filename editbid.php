@@ -149,7 +149,7 @@ if ($action=="submit"){
 	require ('./sendvars.php');
 	echo "</form>\n";
 } elseif ($action=="newbid") {
-	if ($_POST['investment']<=$remaining) {
+	if ($_POST['investment']<=$remaining && $_POST['startup']!="") {
 		echo "Submitting this bid.<br>";
 		$sql_part1 = "INSERT INTO bid (event_name, vc_name, startup_name, ";
 		$sql_part2 = "price, investment, submitted, accepted, rejected, ";
@@ -158,7 +158,9 @@ if ($action=="submit"){
 		$sql_part5 = $_POST['investment'].", 1, 0, 0, 0)";
 		$sql=$sql_part1.$sql_part2.$sql_part3.$sql_part4.$sql_part5;
 		$mysqli->query($sql);
-	} else {
+	} elseif ($_POST['startup']=="") {
+		echo "Cannot submit this bid.  Please go back and be sure to select one of the startups.</br>";
+	} else	{
 		echo "Sorry, cannot submit this bid since you do
 			no have the budget.</br>";
 	}
