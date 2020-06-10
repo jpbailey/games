@@ -159,7 +159,8 @@ if ($action=="submit"){
 		$sql=$sql_part1.$sql_part2.$sql_part3.$sql_part4.$sql_part5;
 		$mysqli->query($sql);
 	} elseif ($_POST['startup']=="") {
-		echo "Cannot submit this bid.  Please go back and be sure to select one of the startups.</br>";
+		echo "Cannot submit this bid because no startup was selected.</br>";
+		echo "Please go back and be sure to select one of the startups.</br>";
 	} else	{
 		echo "Sorry, cannot submit this bid since you do
 			no have the budget.</br>";
