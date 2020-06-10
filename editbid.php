@@ -39,11 +39,35 @@ if ($action!="newbid") {
 }
 
 function capRoom($id, $mysqli) {
-	$sql = "SELECT vc_name FROM bid where id=$id";
-	$bid_query = $mysqli->query($sql);
-	$row = $bid_query->fetch_assoc();
-	echo $row['vc_name'];
-	echo "</br>";
+	$sql = "SELECT vc_name, startup_name, event_name, price FROM bid where id=$id";
+	$query = $mysqli->query($sql);
+	$row = $query->fetch_assoc();
+	$vc = $row['vc_name'];
+	$startup = $row['startup_name'];
+	$event = $row['event_name'];
+	$price = $row['price'];
+	$sql = "SELECT SUM(investment) FROM bid WHERE vc_name = '".$vc."' AND accepted=1";
+	$query = $mysqli->query($sql);
+	$row = $query->fetch_assoc();
+	$vc_spent = $row['SUM(investment)'];
+	$sql = "SELECT SUM(investment) FROM bid WHERE startup_name = '".$startup."' AND accepted=1";
+	$query = $mysqli->query($sql);
+	$row = $query->fetch_assoc();
+	$startup_spent = $row['SUM(investment)'];
+	$sql = "SELECT vc_budget, startup_budget FROM event WHERE name = '".$event."'";
+	$query = $mysqli->query($sql);
+	$row = $query->fetch_assoc();
+	$vc_budget = $row['vc_budget'];
+	$startup_budget = $row['startup_budget'];
+	echo "VC: ".$vc."<br>";
+	echo "Startup: ".$startup."<br>";
+	echo "Event: ".$event."<br>";
+	echo "VC Spent: ".$vc_spent."<br>";
+	echo "Startup Spent: ".$startup_spent."<br>";
+	echo "VC Budget: ".$vc_budget."<br>";
+	echo "Startup Budget: ".$startup_budget."<br>";
+	echo "Price: ".$price."<br>";
+//	echo "</br>";
 //	echo $bid_row['investment'];
 //	use the event id from the bid row to figure out the budget for both sides
 //	figure out how much each side has spent
