@@ -158,6 +158,11 @@ if ($action=="submit"){
 	require ('./sendvars.php');
 	echo "</form>\n";
 } elseif ($action=="newbid") {
+	if (capRoom($id, $mysqli)) {
+		echo "there is cap room";
+	} else {
+		echo "there isn't cap room";
+	}
 	if ($_POST['investment']<=$remaining && $_POST['startup']!="") {
 		echo "Submitting this bid.<br>";
 		$sql_part1 = "INSERT INTO bid (event_name, vc_name, startup_name, ";
