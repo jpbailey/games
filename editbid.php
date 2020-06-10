@@ -39,10 +39,10 @@ if ($action!="newbid") {
 }
 
 function capRoom($id, $mysqli) {
-	$sql = "SELECT * FROM bid where id=$id";
+	$sql = "SELECT vc_name FROM bid where id=$id";
 	$bid_query = $mysqli->query($sql);
-	$bid_row = $bid_query->fetch_assoc();
-	print_r($bid_row);
+	$vc = $bid_query->fetch_assoc();
+	echo vc;
 //	echo $bid_row['investment'];
 //	use the event id from the bid row to figure out the budget for both sides
 //	figure out how much each side has spent
