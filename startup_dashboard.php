@@ -1,5 +1,10 @@
 <?php
 
+// this code is used at the bottom of the startup page to give them
+// information about how much money the startups can receive
+
+echo "<h2>Startup Dashboard</h2>";
+
 $sql = "SELECT vc_budget FROM event WHERE name='".$event."'";
 //echo $sql;
 $sql_query = $mysqli->query($sql);
@@ -22,28 +27,10 @@ while ($row = $data->fetch_assoc()) {
         $row=$sql_query->fetch_assoc();
         if ($row['SUM(investment)'] != "") {
 		echo "$".number_format($vc_budget - $row['SUM(investment)'],0)."<br>\n";
-//                echo "$".number_format($row['SUM(investment)'], 0)."<br>\n";
         } else {
                 echo "$".number_format($vc_budget,0)."<br>\n";
         }
 }
-
-
-//$sql = "SELECT DISTINCT startup_name FROM bid WHERE event_name='".$event."'";
-//$data = $mysqli->query($sql);
-
-//while ($row = $data->fetch_assoc()) {
-//        echo $row['startup_name']." has received ";
-//        $sql = "SELECT SUM(investment) FROM bid WHERE startup_name='".
-//                $row['startup_name']."' AND accepted=1";
-//        $sql_query = $mysqli->query($sql);
-//        $row=$sql_query->fetch_assoc();
-//        if ($row['SUM(investment)'] != "") {
-//                echo "$".number_format($row['SUM(investment)'], 0)."<br>\n";
-//        } else {
-//                echo "$0.<br>\n";
-//        }
-//}
 
 ?>
 

@@ -79,7 +79,6 @@ if ($data->num_rows > 0) {
 		$sql_query = $mysqli->query($sql);
 		$sql_result = $sql_query->fetch_assoc();
 		echo "<td>" . $sql_result['nickname'] . "</td>";
-//		echo "<td>" . $row['vc_name'] . "</td>";
 		$sql = "SELECT nickname FROM user WHERE name='".$row['startup_name']."'";
 		$sql_query = $mysqli->query($sql);
 		$sql_result = $sql_query->fetch_assoc();
@@ -110,24 +109,6 @@ if ($data->num_rows > 0) {
 
 require('./dashboard.php');
 
-//$data = $mysqli->query("SELECT * FROM tiebreaker WHERE event_name='$event';");
-
-//if ($data->num_rows > 0) {
-//        echo "<table>";
-//        echo "<tr><th>VC</th><th>Startup</th><th>New Bid</th>";
-//	echo "<th>Floor Price</th></tr>";
-//        while ($row=$data->fetch_assoc()){
-//                echo "<tr>";
-//                echo "<td>" . $row['vc_name'] . "</td>";
-//                echo "<td>" . $row['selected_startup'] . "</td>";
-//                echo "<td>" . $row['new_bid'] . "</td>";
-//                echo "<td>" . $row['floor_price'] . "</td>";
-//                echo "</tr>";
-//        }
-//        echo "</table>";
-//        } else {
-//        echo "no results";
-//}
 
 ?>
 
