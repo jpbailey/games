@@ -1,5 +1,6 @@
 <?php
 
+//still not working
 echo "<h2>VC Dashboard</h2>";
 
 $sql = "SELECT startup_budget FROM event WHERE name='".$event."'";
