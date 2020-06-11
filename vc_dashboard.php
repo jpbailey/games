@@ -1,20 +1,6 @@
 <?php
 
-//$sql = "SELECT DISTINCT vc_name FROM bid WHERE event_name='".$event."'";
-//$data = $mysqli->query($sql);
-
-//while ($row = $data->fetch_assoc()) {
-//        echo $row['vc_name']." has invested ";
-//        $sql = "SELECT SUM(investment) FROM bid WHERE vc_name='".
-//                $row['vc_name']."' AND accepted=1";
-//        $sql_query = $mysqli->query($sql);
-//        $row=$sql_query->fetch_assoc();
-//        if ($row['SUM(investment)'] != "") {
-//                echo "$".number_format($row['SUM(investment)'], 0)."<br>\n";
-//        } else {
-//                echo "$0.<br>\n";
-//        }
-//}
+echo "<h2>VC Dashboard</h2>";
 
 $sql = "SELECT startup_budget FROM event WHERE name='".$event."'";
 //echo $sql;
