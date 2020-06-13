@@ -12,7 +12,7 @@ while ($row = $sql_query->fetch_assoc()) {
 	$vc_budget = $row['vc_budget'];
 }
 
-$sql = "SELECT DISTINCT vc_id FROM bid WHERE id=".$event_id;
+$sql = "SELECT DISTINCT vc_id FROM bid WHERE event_id=".$event_id;
 $data = $mysqli->query($sql);
 
 while ($row = $data->fetch_assoc()) {
