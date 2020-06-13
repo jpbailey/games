@@ -30,7 +30,7 @@ $event_query=$mysqli->query($sql);
 $event_row=$event_query->fetch_assoc();
 $event_name=$event_row['name'];
 
-echo "<h1>".$startup_name." participating in ".$event_name."<br></h1>\n";
+echo "<h1>".$vc_name." participating in ".$event_name."<br></h1>\n";
 echo "<p style='color:red'>Be sure to refresh this screen so you";
 echo "have accurate data.</p>\n";
 
@@ -60,10 +60,10 @@ echo  "Amount remaining to invest: $".number_format($remaining, 0).".<br>\n";
 function createRow($row, $mysqli) {
 	echo "<tr>\n";
 	$str_arr = explode (",", $row);
-	$sql = "SELECT nickname FROM user WHERE name='".$str_arr[1]."'";
+	$sql = "SELECT name FROM user WHERE name='".$str_arr[1]."'";
 	$sql_query = $mysqli->query($sql);
 	$sql_result = $sql_query->fetch_assoc();
-	echo "<td>".$sql_result['nickname']."</td>\n";
+	echo "<td>".$sql_result['name']."</td>\n";
 	$id = $str_arr[0];
 	echo "<td>";
 	echo '$' . number_format($str_arr[2], 0);
@@ -147,15 +147,15 @@ echo "<form action='editbid.php' method='POST'>";
 echo "<table id='gamedata'>";
 echo "<tr><th>parameter</th><th>value</th></tr>\n";
 echo "<tr><td>Startup</td><td>";
-$sql = "SELECT DISTINCT startup_name FROM bid WHERE event_name='".$event."'";
+$sql = "SELECT DISTINCT startup_id FROM bid WHERE event_id=".$event_id;
 $startup_query = $mysqli->query($sql);
 
 while ($row=$startup_query->fetch_assoc()) {
-	echo "<input type='radio' id='".$row['startup_name']."' ";
-	echo "name='startup' value='".$row['startup_name']."'>";
+	echo "<input type='radio' id='".$row['startup_id']."' ";
+	echo "name='startup' value='".$row['startup_id']."'>";
 	echo "<label for='".$row['startup_name']."'";
 	echo ">";
-	$sql = "SELECT nickname FROM user WHERE name='".$row['startup_name']."'";
+	$sql = "SELECT name FROM user WHERE id=".$row['startup_id'];
 	$sql_query= $mysqli->query($sql);
 	$sql_result=$sql_query->fetch_assoc();
 	echo $sql_result['nickname'];
