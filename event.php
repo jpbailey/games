@@ -80,7 +80,7 @@ while ($counter <= $user_data['id']+$num_startup) {
 	echo "; link: http://digitalplatformgames.com/games/login.php?";
 	echo "event_id=".$event_id."&user_id=".$counter."<br>\n";
 	$sql = "INSERT INTO user (name, password, vc,
-		startup) VALUES ('".$new_name."', '".
+		startup) VALUES ('".$new_name."', ".
 		$new_password.", 0, 1)";
 	echo $sql."<br>";
 	$mysqli->query($sql);
@@ -99,7 +99,7 @@ while ($counter <= $user_data['id']+$num_startup+$num_vc) {
 	echo "; link: http://digitalplatformgames.com/games/login.php?";
 	echo "event_id=".$event_id."&user_id=".$counter."<br>\n";
 	$sql = "INSERT INTO user (name, password, vc,
-		startup) VALUES ('".$new_name."', '".
+		startup) VALUES ('".$new_name."', ".
 		$new_password.", 1, 0)";
 	echo $sql."<br>";
 	$mysqli->query($sql);
