@@ -72,16 +72,15 @@ $startup_array=array();
 
 $counter = $user_data['id']+1;
 while ($counter <= $user_data['id']+$num_startup) {
-	$new_user = "startup".$counter;
-	array_push($startup_array, $new_user);
-	$new_nickname = "Startup ".$counter;
+	array_push($startup_array, $counter);
+	$new_name = "Startup ".$counter;
 	$new_password = rand(1111,9999);
 	echo "user: ".$new_user."; password: ".$new_password;
 	echo "; link: http://digitalplatformgames.com/games/login.php?";
 	echo "event=".$event."&user=".$new_user."<br>\n";
-	$sql = "INSERT INTO user (name, nickname, password, vc,
-		startup) VALUES ('".$new_user."', '".
-		$new_nickname."', ".$new_password.", 0, 1)";
+	$sql = "INSERT INTO user (name, password, vc,
+		startup) VALUES ('".$new_name."', '".
+		$new_password.", 0, 1)";
 //	echo $sql."<br>";
 	$mysqli->query($sql);
 	$counter = $counter +1;
@@ -92,16 +91,15 @@ while ($counter <= $user_data['id']+$num_startup) {
 $vc_array=array();
 
 while ($counter <= $user_data['id']+$num_startup+$num_vc) {
-	$new_user = "vc".$counter;
-	array_push($vc_array, $new_user);
-	$new_nickname = "Venture Capitalist ".$counter;
+	array_push($vc_array, $counter);
+	$new_name = "Venture Capitalist ".$counter;
 	$new_password = rand(1111,9999);
 	echo "user: ".$new_user."; password: ".$new_password;
 	echo "; link: http://digitalplatformgames.com/games/login.php?";
 	echo "event=".$event."&user=".$new_user."<br>\n";
-	$sql = "INSERT INTO user (name, nickname, password, vc,
-		startup) VALUES ('".$new_user."', '".
-		$new_nickname."', ".$new_password.", 1, 0)";
+	$sql = "INSERT INTO user (name, password, vc,
+		startup) VALUES ('".$new_name."', '".
+		$new_password.", 1, 0)";
 //	echo $sql."<br>";
 	$mysqli->query($sql);
 	$counter = $counter + 1;
@@ -111,9 +109,9 @@ while ($counter <= $user_data['id']+$num_startup+$num_vc) {
 
 foreach ($vc_array as $vc) {
 	foreach ($startup_array as $startup) {
-		$sql = "INSERT INTO bid (event_name, vc_name, startup_name, price,
-			investment, submitted, accepted, rejected, counter) VALUES ('".$event."', '".
-			$vc."', '".$startup."', 100, 500000, 0, 0, 0, 0)";
+		$sql = "INSERT INTO bid (event_id, vc_id, startup_id, price,
+			investment, submitted, accepted, rejected, counter) VALUES (".$event_id.", ".
+			$vc.", ".$startup.", 100, 500000, 0, 0, 0, 0)";
 		$mysqli->query($sql);
 	}
 }
@@ -121,7 +119,6 @@ foreach ($vc_array as $vc) {
 //go back to control panel
 echo "<form action='controlpanel.php'>\n";
 echo "<input type='submit' name='control' value='Return to Control Panel'>\n";
-echo "<input type='hidden' name='user' value=$user>\n";
 echo "<input type='hidden' name='user_id' value=$user_id\n";
 echo "<input type='hidden' name='password' value=$password>\n";
 echo "</form>";

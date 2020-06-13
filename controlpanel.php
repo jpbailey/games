@@ -60,9 +60,8 @@ echo "<input type='date' name='start_date'></td></tr>";
 echo "<tr><td>End date?</td><td>";
 echo "<input type='date' name='end_date'></td></tr>";
 echo "</table>";
-echo "<input type='hidden' name='user' value=$user>";
-echo "<input type='hidden' name='password' value=$password>";
 echo "<input type='hidden' name='user_id' value=$user_id>";
+echo "<input type='hidden' name='password' value=$password>";
 echo "<input type='submit' value='Create New Event'>";
 echo "</form>";
 
