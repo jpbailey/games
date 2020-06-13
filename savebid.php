@@ -35,8 +35,7 @@ if ($row['vc']==1) {
 }
 
 echo "<input type=submit name='review_bids' value='review bids'>";
-echo "<input type='hidden' name='event' value=$event>";
-echo "<input type='hidden' name='user' value=$user>";
+echo "<input type='hidden' name='event_id' value=$event_id>";
 echo "<input type='hidden' name='user_id' value=$user_id>";
 echo "<input type='hidden' name='password' value=$password>";
 echo "</form>\n";
