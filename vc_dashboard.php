@@ -12,14 +12,14 @@ while ($row = $sql_query->fetch_assoc()) {
         $startup_budget = $row['startup_budget'];
 }
 
-$sql = "SELECT DISTINCT startup_name FROM bid WHERE id=".$event_id;
+$sql = "SELECT DISTINCT startup_id FROM bid WHERE id=".$event_id;
 $data = $mysqli->query($sql);
 
 while ($row = $data->fetch_assoc()) {
-	$sql = "SELECT nickname FROM user WHERE id=".$row['startup_id'];
+	$sql = "SELECT name FROM user WHERE id=".$row['startup_id'];
 	$sql_query = $mysqli->query($sql);
 	$sql_data=$sql_query->fetch_assoc();
-        echo $sql_data['nickname']." can still receive ";
+        echo $sql_data['name']." can still receive ";
         $sql = "SELECT SUM(investment) FROM bid WHERE startup_id=".
                 $row['startup_id']." AND accepted=1";
         $sql_query = $mysqli->query($sql);
