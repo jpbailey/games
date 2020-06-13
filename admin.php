@@ -47,7 +47,7 @@ if ($data->num_rows > 0) {
 }
 
 // $sql = "SELECT * FROM bid WHERE event_name='$event' ORDER BY submitted, bid DESC;";
-$sql = "SELECT * FROM bid WHERE event_name='".$event."'";
+$sql = "SELECT * FROM bid WHERE event_name='".$event."' ORDER BY 'vc_name';
 $data = $mysqli->query($sql);
 
 if ($data->num_rows > 0) {
