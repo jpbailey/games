@@ -40,7 +40,7 @@ if ($user_info['name']!="") {
 
 echo "<h1> Welcome " . $user_name;
 
-if (is_null($event_id)) {
+if ($event_id=="") {
 	echo ".<p>";
 } else {
 	$sql="SELECT * FROM event WHERE id=".$event_id;
