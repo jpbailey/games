@@ -42,9 +42,9 @@ function capRoom($bid_id, $mysqli) {
 	$sql = "SELECT vc_id, startup_id, event_id, investment FROM bid where id=".$bid_id;
 	$query = $mysqli->query($sql);
 	$row = $query->fetch_assoc();
-	$vc = $row['vc_id'];
-	$startup = $row['startup_name'];
-	$event = $row['event_id'];
+	$vc_id = $row['vc_id'];
+	$startup_id = $row['startup_id'];
+	$event_id = $row['event_id'];
 	$investment = $row['investment'];
 	$sql = "SELECT SUM(investment) FROM bid WHERE vc_id = ".$vc_id." AND accepted=1";
 	$query = $mysqli->query($sql);
@@ -146,7 +146,7 @@ if ($action=="submit"){
 	require ('./sendvars.php');
 	echo "</form>\n";
 } elseif ($action=="newbid") {
-	if ($_POST['investment']<=$remaining && $_POST['startup']!="") {
+	if ($_POST['investment']<=$remaining && $_POST['startup_id']!="") {
 		echo "Submitting this bid.<br>";
 		$sql_part1 = "INSERT INTO bid (event_id, vc_id, startup_id, ";
 		$sql_part2 = "price, investment, submitted, accepted, rejected, ";
