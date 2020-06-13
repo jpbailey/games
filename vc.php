@@ -144,22 +144,22 @@ echo "</form>\n";
 
 echo "<h2>Make a new offer</h2>";
 
-echo "<form action='editbid.php' method='POST'>";
-echo "<table id='gamedata'>";
+echo "<form action='editbid.php' method='POST'>\n";
+echo "<table id='gamedata'>\n";
 echo "<tr><th>parameter</th><th>value</th></tr>\n";
-echo "<tr><td>Startup</td><td>";
+echo "<tr><td>Startup</td><td>\n";
 $sql = "SELECT DISTINCT startup_id FROM bid WHERE event_id=".$event_id;
 $startup_query = $mysqli->query($sql);
 
 while ($row=$startup_query->fetch_assoc()) {
-	echo "<input type='radio' id='".$row['startup_id']."' ";
-	echo "name='startup' value='".$row['startup_id']."'>";
+	echo "<input type='radio' id=".$row['startup_id']." ";
+	echo "name='startup' value=".$row['startup_id'].">";
 	echo "<label for='".$row['startup_id']."'";
 	echo ">";
 	$sql = "SELECT name FROM user WHERE id=".$row['startup_id'];
 	$sql_query= $mysqli->query($sql);
 	$sql_result=$sql_query->fetch_assoc();
-	echo $sql_result['nickname'];
+	echo $sql_result['name'];
 	echo "</label><br>";
 }
 
