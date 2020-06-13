@@ -16,8 +16,7 @@ $sql = "SELECT DISTINCT vc_id FROM bid WHERE event_id=".$event_id;
 $data = $mysqli->query($sql);
 
 while ($row = $data->fetch_assoc()) {
-        print_r ($row);
-	$sql = "SELECT name FROM user WHERE vc_id=".$row['vc_id'];
+	$sql = "SELECT name FROM user WHERE id=".$row['vc_id'];
 	$sql_query = $mysqli->query($sql);
 	$sql_data=$sql_query->fetch_assoc();
 	echo $sql_data['name']." remaining funds: ";
