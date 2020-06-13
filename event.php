@@ -64,9 +64,7 @@ $sql = "INSERT INTO event (active, name, num_startup, startup_budget,
 //echo $sql."<br>";
 $mysqli->query($sql);
 
-print_r($mysqli->insert_id);
-//$event_id = $mysqli->lastInsertId();
-
+$event_id = ($mysqli->insert_id);
 
 $sql = "SELECT id FROM user ORDER BY id DESC LIMIT 1";
 $user_query = $mysqli->query($sql);
@@ -78,9 +76,9 @@ while ($counter <= $user_data['id']+$num_startup) {
 	array_push($startup_array, $counter);
 	$new_name = "Startup ".$counter;
 	$new_password = rand(1111,9999);
-	echo "user: ".$new_user."; password: ".$new_password;
+	echo "user: ".$new_name."; password: ".$new_password;
 	echo "; link: http://digitalplatformgames.com/games/login.php?";
-	echo "event=".$event."&user_id=".$counter."<br>\n";
+	echo "event_id=".$event_id."&user_id=".$counter."<br>\n";
 	$sql = "INSERT INTO user (name, password, vc,
 		startup) VALUES ('".$new_name."', '".
 		$new_password.", 0, 1)";
@@ -97,9 +95,9 @@ while ($counter <= $user_data['id']+$num_startup+$num_vc) {
 	array_push($vc_array, $counter);
 	$new_name = "Venture Capitalist ".$counter;
 	$new_password = rand(1111,9999);
-	echo "user: ".$new_user."; password: ".$new_password;
+	echo "user: ".$new_name."; password: ".$new_password;
 	echo "; link: http://digitalplatformgames.com/games/login.php?";
-	echo "event=".$event."&user=".$new_user."<br>\n";
+	echo "event_id=".$event_id."&user_id=".$counter."<br>\n";
 	$sql = "INSERT INTO user (name, password, vc,
 		startup) VALUES ('".$new_name."', '".
 		$new_password.", 1, 0)";
