@@ -90,17 +90,17 @@ if ($event_id != "") {
 	echo "startups.<p>";
 }
 
-echo "To get started, please enter the password provided to you:";
+echo "To get started, please enter the password provided to you:\n";
 if ($role=="vc") {
-	echo "<form action=vc.php method='post'>";
+	echo "<form action=vc.php method='post'>\n";
 	} elseif ($role=="startup") {
-	echo "<form action=startup.php method='post'>";
+	echo "<form action=startup.php method='post'>\n";
 	} elseif ($role=="admin") {
-	echo "<form action=controlpanel.php method='post'>";
+	echo "<form action=controlpanel.php method='post'>\n";
 	}
-echo "<input type='hidden' name='user_id' value=$user_id>";
-echo "<input type='hidden' name='event_id' value=$event_id>";
-echo "password: <input type='password' name='password'>";
+echo "<input type='hidden' name='user_id' value=$user_id>\n";
+echo "<input type='hidden' name='event_id' value=$event_id>\n";
+echo "password: <input type='password' name='password'>\n";
 echo "<input type='submit'>";
 echo "</form>";
 

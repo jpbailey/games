@@ -32,8 +32,7 @@ while ($row=$event_query->fetch_assoc()){
 	if ($row['active'] == 1) {
 	        $fullname = $row['name']." - started on: ".$row['start_date'];
 		echo "<form action=admin.php method='post'>";
-		echo "<input type='hidden' name='event' value=".$row['name'].">";
-		echo "<input type='hidden' name='user' value=$user>";
+		echo "<input type='hidden' name='event_id' value=".$row['id'].">";
 		echo "<input type='hidden' name='user_id' value=$user_id>";
 		echo "<input type='hidden' name='password' value=$password>";
 		echo "<input type='submit' value='".$fullname."'>";

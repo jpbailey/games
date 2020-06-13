@@ -1,7 +1,6 @@
 <?php
 
-$event=htmlspecialchars($_POST['event']);
-$user=htmlspecialchars($_POST['user']);
+$event=htmlspecialchars($_POST['event_id']);
 $user_id=htmlspecialchars($_POST['user_id']);
 $password=htmlspecialchars($_POST['password']);
 
