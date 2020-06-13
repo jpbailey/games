@@ -20,26 +20,29 @@ require ('./variables.php');
 require ('./database.php');
 
 // welcome message
-$sql = "SELECT nickname FROM user WHERE id=".$user_id;
+// welcome message
+$sql = "SELECT name FROM user WHERE id=".$user_id;
 $user_query=$mysqli->query($sql);
 $user_row=$user_query->fetch_assoc();
-$nickname= $user_row['nickname'];
+$vc_name= $user_row['name'];
+$sql = "SELECT name FROM event WHERE id=".$event_id;
+$event_query=$mysqli->query($sql);
+$event_row=$event_query->fetch_assoc();
+$event_name=$event_row['name'];
 
-echo "<h1>".$nickname." participating in ".$event."<br></h1>\n";
+echo "<h1>".$startup_name." participating in ".$event_name."<br></h1>\n";
 echo "<p style='color:red'>Be sure to refresh this screen so you";
 echo "have accurate data.</p>\n";
-//echo "Here are your current bids:</br>\n";
 
 // find out how much the vc budget is and how much more money
 // this vc has to spend
-
-$sql = "SELECT vc_budget FROM event WHERE name='".$event."'";
+$sql = "SELECT vc_budget FROM event WHERE id=".$event_id;
 $event_query = $mysqli->query($sql);
 $event_row = $event_query->fetch_assoc();
 $budget = $event_row['vc_budget'];
 
-$sql = "SELECT SUM(investment) FROM bid WHERE vc_name='".
-	$user."' AND accepted=1";
+$sql = "SELECT SUM(investment) FROM bid WHERE vc_id=".
+	$user_id." AND accepted=1";
 $bid_query = $mysqli->query($sql);
 $bid_row = $bid_query->fetch_assoc();
 $spent = $bid_row['SUM(investment)'];
