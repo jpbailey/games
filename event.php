@@ -82,7 +82,7 @@ while ($counter <= $user_data['id']+$num_startup) {
 	$sql = "INSERT INTO user (name, password, vc,
 		startup) VALUES ('".$new_name."', '".
 		$new_password.", 0, 1)";
-//	echo $sql."<br>";
+	echo $sql."<br>";
 	$mysqli->query($sql);
 	$counter = $counter +1;
 }
@@ -101,7 +101,7 @@ while ($counter <= $user_data['id']+$num_startup+$num_vc) {
 	$sql = "INSERT INTO user (name, password, vc,
 		startup) VALUES ('".$new_name."', '".
 		$new_password.", 1, 0)";
-//	echo $sql."<br>";
+	echo $sql."<br>";
 	$mysqli->query($sql);
 	$counter = $counter + 1;
 }
