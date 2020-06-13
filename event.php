@@ -63,9 +63,11 @@ $sql = "INSERT INTO event (active, name, num_startup, startup_budget,
 	$event_description."')";
 //echo $sql."<br>";
 $mysqli->query($sql);
-$event_id = $mysqli->lastInsertId();
 
-echo $event_id;
+$sql = "SELECT LAST_INSERT_ID()";
+$sql_query=$mysqli->query($sql);
+print_r($sql_query);
+//$event_id = $mysqli->lastInsertId();
 
 
 $sql = "SELECT id FROM user ORDER BY id DESC LIMIT 1";
