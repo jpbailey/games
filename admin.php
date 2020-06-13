@@ -1,5 +1,5 @@
 <head>
-<title>Administrator</title>
+<title>Administrator Panel</title>
 <link rel="stylesheet" href="./styles.css">
 </head>
 <body>

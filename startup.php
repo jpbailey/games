@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Bid data</title>
+<title>Startup Panel</title>
 <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
