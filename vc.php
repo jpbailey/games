@@ -65,7 +65,7 @@ function createRow($row, $mysqli) {
 //	$sql_result = $sql_query->fetch_assoc();
 //	echo "<td>".$sql_result['name']."</td>\n";
 	$id = $str_arr[0];
-	echo "<td>".$str_arr[1]."</td>\n";
+	echo "<td>goes here right".$str_arr[1]."</td>\n";
 	echo "<td>";
 	echo '$' . number_format($str_arr[2], 0);
 	echo "</td>\n";
