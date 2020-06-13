@@ -53,8 +53,6 @@ if ($flag==1) {
 // need to escape the characters of the text fields before inserting them
 // into the database.
 
-$sql = "SELECT id FROM user ORDER BY id DESC LIMIT 1";
-$user_query = $mysqli->query($sql);
 
 echo "Creating event: ".$event."</br>\n";
 $sql = "INSERT INTO event (active, name, num_startup, startup_budget,
@@ -65,20 +63,24 @@ $sql = "INSERT INTO event (active, name, num_startup, startup_budget,
 	$event_description."')";
 //echo $sql."<br>";
 $mysqli->query($sql);
+$event_id = $mysqli->lastInsertId();
+
+echo $event_id;
 
 
+$sql = "SELECT id FROM user ORDER BY id DESC LIMIT 1";
+$user_query = $mysqli->query($sql);
 $user_data = $user_query->fetch_assoc();
+$counter = $user_data['id']+1;
 
 $startup_array=array();
-
-$counter = $user_data['id']+1;
 while ($counter <= $user_data['id']+$num_startup) {
 	array_push($startup_array, $counter);
 	$new_name = "Startup ".$counter;
 	$new_password = rand(1111,9999);
 	echo "user: ".$new_user."; password: ".$new_password;
 	echo "; link: http://digitalplatformgames.com/games/login.php?";
-	echo "event=".$event."&user=".$new_user."<br>\n";
+	echo "event=".$event."&user_id=".$counter."<br>\n";
 	$sql = "INSERT INTO user (name, password, vc,
 		startup) VALUES ('".$new_name."', '".
 		$new_password.", 0, 1)";
