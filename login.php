@@ -14,6 +14,8 @@
 $event_id=htmlspecialchars($_GET["event_id"]);
 $user_id=htmlspecialchars($_GET["user_id"]);
 
+echo $user_id;
+
 // make and check database connection
 
 $config = parse_ini_file('./private/config.ini');
