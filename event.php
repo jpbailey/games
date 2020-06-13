@@ -7,6 +7,12 @@
 
 <?php
 
+// this script will populate the database with information
+// needed to run the game.  It makes an entry into the event
+// table, adds all of the users to the user table, and then
+// makes some placeholder bids in the bid table base on each
+// vc and startup pairing
+
 // set the environment variables
 require ('./environment.php');
 
@@ -23,8 +29,6 @@ $event_description = htmlspecialchars($_POST['event_description']);
 
 // connect, check, and authenticate a database connection
 require ('./database.php');
-
-// echo $event;
 
 //make sure the event name isn't already there
 $sql = "SELECT name FROM event WHERE 1";
@@ -43,17 +47,8 @@ if ($flag==1) {
 	die();
 }
 
-
-// find the last index used in the database
-// number the startups from that index + 1 to the end
-// then start numbering the vcs from +1 to the end of that
-
-// need to first update the event table with $event and $event_description
-// as well as $num_startup and $num_vc and $start_date and $end_date
-// need to escape the characters of the text fields before inserting them
-// into the database.
-
-
+// create the event in the event table based on the event
+// parametera and get the event_id from the database
 echo "Creating event: ".$event_name."</br>\n";
 $sql = "INSERT INTO event (active, name, num_startup, startup_budget,
 	num_vc, vc_budget, start_date,
@@ -61,10 +56,13 @@ $sql = "INSERT INTO event (active, name, num_startup, startup_budget,
 	$startup_budget.", ".$num_vc.", ".$vc_budget.", '".
 	$start_date."', '".$end_date."', '".
 	$event_description."')";
-//echo $sql."<br>";
 $mysqli->query($sql);
 
 $event_id = ($mysqli->insert_id);
+
+// find the last index used in the database from the user table
+// number the startups from that index + 1 to the end
+// then start numbering the vcs from +1 to the end of that
 
 $sql = "SELECT id FROM user ORDER BY id DESC LIMIT 1";
 $user_query = $mysqli->query($sql);
@@ -82,12 +80,10 @@ while ($counter <= $user_data['id']+$num_startup) {
 	$sql = "INSERT INTO user (name, password, vc,
 		startup) VALUES ('".$new_name."', ".
 		$new_password.", 0, 1)";
-	echo $sql."<br>";
 	$mysqli->query($sql);
 	$counter = $counter +1;
 }
 
-//print_r($startup_array);
 
 $vc_array=array();
 
@@ -101,12 +97,13 @@ while ($counter <= $user_data['id']+$num_startup+$num_vc) {
 	$sql = "INSERT INTO user (name, password, vc,
 		startup) VALUES ('".$new_name."', ".
 		$new_password.", 1, 0)";
-	echo $sql."<br>";
 	$mysqli->query($sql);
 	$counter = $counter + 1;
 }
 
-//print_r($vc_array);
+// now that we have two arrays -- one for the VCs and one for
+// the startups -- we need to create entries into the bid table
+// based on each pairing
 
 foreach ($vc_array as $vc) {
 	foreach ($startup_array as $startup) {
@@ -123,38 +120,6 @@ echo "<input type='submit' name='control' value='Return to Control Panel'>\n";
 echo "<input type='hidden' name='user_id' value=$user_id\n";
 echo "<input type='hidden' name='password' value=$password>\n";
 echo "</form>";
-
-
-//<table>
-//<tr><th>parameter</th><th>value</th></tr>
-//<tr><td>How many startups</td><td></td></tr>
-//<tr><td>How many VCs</td><td></td></tr>
-//<tr><td>Start date</td><td></td></tr>
-//<tr><td>End date</td><td></td></tr>
-//</table>
-
-// this script will create an event parameters including poplulating
-// the market and user tables
-//
-// it will ask the user for the following information an put it in the
-// corresponding fields within the event table:
-// - name
-// - num_startup
-// - num_vc
-// - start_date
-// - end_date
-//
-// it will then use the num_startup and num_vc to create the following
-// in the user table:
-// - name:  either vc## or st## by looking at the next available ##
-// - nickname:  either Venture## or Startup##
-// - password:  a 4-digit code that is randomly created
-// - vc:  flagged as 1 if they are a venture capitalist; 0 otherwise
-// - startup:  flagged as 1 if they are a startup; 0 otherwise
-//
-// finally, it will create  the following in the market table:
-// - event_name:  with the event
-// - user_name:  with the user; either vc## or st##
 
 ?>
 </body>
