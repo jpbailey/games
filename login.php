@@ -29,6 +29,7 @@ if ($mysqli->connect_error) {
 // retrieve it from the database
 
 $sql="SELECT * FROM user WHERE id=".$user_id;
+echo $sql;
 $user_query = $mysqli->query($sql);
 $user_info = $user_query->fetch_assoc();
 
