@@ -37,7 +37,7 @@ while ($row=$vc_query->fetch_assoc()) {
     $user_row=$user_query->fetch_assoc();
     echo "<tr>";
     echo "<td>".$user_row['name']."</td>";
-    echo "<td><form><input type=text name='newname' value='".$user_row['name']."'>";
+    echo "<td><form action='><input type=text name='newname' value='".$user_row['name']."'>";
     echo "<input type='submit' name='edit_name' value='save'></td>";
     $vc_url = "http://digitalplatformgames.com/games/login.php?event_id=".$event_id."&user_id=".$user_row['id'];
     echo "<td><a href='".$vc_url."'>".$vc_url."</a></td>";
@@ -47,6 +47,9 @@ while ($row=$vc_query->fetch_assoc()) {
 }
 echo "</table>\n";
 
+if(isset($_POST['edit_name'])) { 
+    echo "Edit Name has been selected."; 
+} 
 
 ?>
 
