@@ -5,26 +5,10 @@
 <body>
 
 <?php
-// here you want to get all of the bid data that has been
-// entered into the system.  the assumption is that all of the vcs
-// have entered in the data correctly and you are just looking at 
-// the data to figure out what bids translate into executed transactions
-//
-// you need to pull from the bid table all rows where event_name is
-// the event that you are interested in looking at.  this includes:
-//
-// additionally, you will need to pull from the tiebraker table where
-// the event_name is the event that you are interested in looking at
-// the following information:
-// - vc_name
-// - selected_startup:  the name of the startup that they are willing
-//   to go higher on in price
-// - new_bid:  next higher bid for the selected startup
-// - floor_price:  the minimum price they will pay for any unclaimed
-//   investment opportunities
-//
-// the information should be presented such that all bids
-// are ranked from highest price to lowest price
+
+// this is the admin page for a particular event
+// you want to show all of the bid data even in draft
+// form as well as the VC and startup dashboards
 
 // bring in the variables from the previous page
 
@@ -46,9 +30,6 @@ $event_row = $event_query->fetch_assoc();
 echo "<h1>Data from event: ".$event_row['name']."</h1>\n";
 echo "<p style='color:red'>Be sure to refresh this screen so you";
 echo "have accurate data.</p>\n";
-//echo "There should be ".$event_row['num_vc']." VCs.<p>";
-//echo "There should be ".$event_row['num_startup']." startups.<p>";
-//echo "There should be ".$event_row['num_vc']*$event_row['num_startup']." bids.<p>";
 
 $sql = "SELECT * FROM bid WHERE event_name='$event';";
 $data = $mysqli->query($sql);
@@ -107,7 +88,8 @@ if ($data->num_rows > 0) {
 	echo "no results<p>";
 }
 
-require('./dashboard.php');
+require('./vc_dashboard.php');
+require('./startup_dashboard.php');
 
 
 ?>
