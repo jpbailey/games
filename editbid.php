@@ -19,7 +19,7 @@ require ('./variables.php');
 if ($_POST['action']=='submit new bid') {
 	$action="newbid";
 } else {
-	$id = substr(key($_POST),6)+0;
+	$bid_id = substr(key($_POST),6)+0;
 	$action = substr(key($_POST),0,6);
 }
 
@@ -33,13 +33,13 @@ require ('./database.php');
 // current bid information
 
 if ($action!="newbid") {
-	$sql = "SELECT * FROM bid WHERE id=$id;";
+	$sql = "SELECT * FROM bid WHERE id=$bid_id;";
 	$bid_query = $mysqli->query($sql);
 	$bid_row=$bid_query->fetch_assoc();
 }
 
-function capRoom($id, $mysqli) {
-	$sql = "SELECT vc_id, startup_id, event_id, investment FROM bid where id=".$id;
+function capRoom($bid_id, $mysqli) {
+	$sql = "SELECT vc_id, startup_id, event_id, investment FROM bid where id=".$bid_id;
 	$query = $mysqli->query($sql);
 	$row = $query->fetch_assoc();
 	$vc = $row['vc_id'];
@@ -69,12 +69,12 @@ function capRoom($id, $mysqli) {
 }
 	
 if ($action=="submit"){
-	$sql = "SELECT investment FROM bid WHERE id=".$id;
+	$sql = "SELECT investment FROM bid WHERE id=".$bid_id;
 	$result=$mysqli->query($sql);
 	$row=$result->fetch_assoc();
 	if ($row['investment']<=$remaining) {
 		echo "<h1>Successfully submitted this bid</h1>\n";
-		$sql = "UPDATE bid SET submitted=1 WHERE id=".$id;
+		$sql = "UPDATE bid SET submitted=1 WHERE id=".$bid_id;
 		$mysqli->query($sql);
 	} else {
 		echo "Sorry, you cannot submit this bid since you do
@@ -106,22 +106,22 @@ if ($action=="submit"){
 	echo "<td><input type=number name='investment' value=".$bid_row['investment']."></td></tr>";
 	echo "</table>";
 	echo "<input type=submit name='save' value='save'>";
-	echo "<input type='hidden' name='id' value=$id>";
+	echo "<input type='hidden' name='id' value=$bid_id>";
 	require ('./sendvars.php');
 	echo "</form>\n";
 } elseif ($action == "reject") {
 	echo "<h1>Successfully rejecting this bid</h1>\n";
-	$sql = "UPDATE bid SET rejected=1 WHERE id=".$id;
+	$sql = "UPDATE bid SET rejected=1 WHERE id=".$bid_id;
 	$mysqli->query($sql);
 	echo "<form action='".$role.".php' method='POST'>";
 	echo "<input type=submit name='review_bids' value='review bids'>";
 	require ('./sendvars.php');
 	echo "</form>\n";
 } elseif ($action == "accept") {
-	$message = capRoom($id, $mysqli);
+	$message = capRoom($bid_id, $mysqli);
 	if ($message == "okay") {
 		echo "Accepted this bid.</br>";
-		$sql = "UPDATE bid SET accepted=1 WHERE id=".$id;
+		$sql = "UPDATE bid SET accepted=1 WHERE id=".$bid_id;
 		$mysqli->query($sql);
 	} else {
 		echo $message;
@@ -142,7 +142,7 @@ if ($action=="submit"){
 	echo "<td><input type=number name='investment' value=".$bid_row['investment']."></td></tr>";
 	echo "</table>";
 	echo "<input type=submit name='save' value='save'>";
-	echo "<input type='hidden' name='id' value=$id>";
+	echo "<input type='hidden' name='id' value=$bid_id>";
 	require ('./sendvars.php');
 	echo "</form>\n";
 } elseif ($action=="newbid") {
@@ -155,7 +155,7 @@ if ($action=="submit"){
 		$sql_part5 = $_POST['investment'].", 1, 0, 0, 0)";
 		$sql=$sql_part1.$sql_part2.$sql_part3.$sql_part4.$sql_part5;
 		$mysqli->query($sql);
-	} elseif ($_POST['startup']=="") {
+	} elseif ($_POST['startup_id']=="") {
 		echo "Cannot submit this bid because no startup was selected.</br>";
 		echo "Please go back and be sure to select one of the startups.</br>";
 	} else	{
