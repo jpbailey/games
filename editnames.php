@@ -48,7 +48,7 @@ echo "</table>\n";
 
 ?>
 
-<form>
+<form action='vc.php' method='POST'>
 <input type='submit' name='action' value='Administratpr Panel'>
 
 <?php
