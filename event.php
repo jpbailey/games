@@ -54,7 +54,7 @@ if ($flag==1) {
 // into the database.
 
 
-echo "Creating event: ".$event."</br>\n";
+echo "Creating event: ".$event_name."</br>\n";
 $sql = "INSERT INTO event (active, name, num_startup, startup_budget,
 	num_vc, vc_budget, start_date,
 	end_date, description) VALUES (1, '".$event_name."', ".$num_startup.", ".
