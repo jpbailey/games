@@ -29,17 +29,16 @@ if ($mysqli->connect_error) {
 // retrieve it from the database
 
 $sql="SELECT * FROM user WHERE id=".$user_id;
-echo $sql;
 $user_query = $mysqli->query($sql);
 $user_info = $user_query->fetch_assoc();
 
-if ($user_info['nickname']!="") {
-	$nickname = $user_info['nickname'];
+if ($user_info['name']!="") {
+	$user_name = $user_info['name'];
 } else {
 	die("User not found.");
 }
 
-echo "<h1> Welcome " . $nickname;
+echo "<h1> Welcome " . $user_name;
 
 $event_query = $mysqli->query("SELECT * FROM event WHERE id=$event_id;");
 $event_info = $event_query->fetch_assoc();
