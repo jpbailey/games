@@ -6,7 +6,7 @@
 echo "<h2>Startup Dashboard</h2>";
 
 $sql = "SELECT vc_budget FROM event WHERE id='".$event_id."'";
-//echo $sql;
+echo $sql;
 $sql_query = $mysqli->query($sql);
 $vc_budget=0;
 while ($row = $sql_query->fetch_assoc()) {
