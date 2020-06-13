@@ -27,6 +27,11 @@ echo "<h1>Data from event: ".$event_row['name']."</h1>\n";
 echo "<p style='color:red'>Be sure to refresh this screen so you";
 echo "have accurate data.</p>\n";
 
+echo "<form action='editnames.php' method='POST'>";
+echo "<input type=submit name='editnames' value='edit/view participants'>";
+require ('./sendvars.php');
+echo "</form>\n";
+
 $sql = "SELECT * FROM bid WHERE event_id=".$event_id;
 $data = $mysqli->query($sql);
 
