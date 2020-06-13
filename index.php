@@ -33,6 +33,7 @@ if ($event_query->num_rows > 0) {
 	echo "<th>start date</th><th>end date</th><th>status</th></tr>";
         while ($row=$event_query->fetch_assoc()){
                 echo "<tr>";
+                echo "<td>".$row['id']."</td>";
                 echo "<td>" . $row['name'] . "</td>";
                 echo "<td>" . $row['description'] . "</td>";
                 echo "<td>" . $row['num_startup'] . "</td>";

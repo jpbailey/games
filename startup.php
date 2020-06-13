@@ -19,23 +19,27 @@ require ('./variables.php');
 require ('./database.php');
 
 // welcome message
-$sql = "SELECT nickname FROM user WHERE id=".$user_id;
+$sql = "SELECT name FROM user WHERE id=".$user_id;
 $user_query=$mysqli->query($sql);
 $user_row=$user_query->fetch_assoc();
-$nickname= $user_row['nickname'];
+$startup_name= $user_row['name'];
+$sql = "SELECT name FROM event WHERE id=".$event_id;
+$event_query=$mysqli->query($sql);
+$event_row=$event_query->fetch_assoc();
+$event_name=$event_row['name'];
 
-echo "<h1>".$nickname." participating in ".$event."<br></h1>\n";
+echo "<h1>".$startup_name." participating in ".$event_name."<br></h1>\n";
 echo "<p style='color:red'>Be sure to refresh this screen so you";
 echo "have accurate data.</p>\n";
 
 // take a look at the remaining budget for this startup
-$sql = "SELECT startup_budget FROM event WHERE name='".$event."'";
+$sql = "SELECT startup_budget FROM event WHERE id=".$event_id;
 $event_query = $mysqli->query($sql);
 $event_row = $event_query->fetch_assoc();
 $budget = $event_row['startup_budget'];
 
-$sql = "SELECT SUM(investment) FROM bid WHERE startup_name='".
-        $user."' AND accepted=1";
+$sql = "SELECT SUM(investment) FROM bid WHERE startup_id=".
+        $user_id." AND accepted=1";
 $bid_query = $mysqli->query($sql);
 $bid_row = $bid_query->fetch_assoc();
 $spent = $bid_row['SUM(investment)'];
@@ -53,7 +57,7 @@ echo "Amount available to accept: $".number_format($remaining, 0)."<br>\n";
 // need to edit this to allow a starup to accept a bid if
 // they are not over their budget amount
 
-$sql = "SELECT * FROM bid WHERE event_name='".$event."' AND startup_name='".$user."'";
+$sql = "SELECT * FROM bid WHERE event_id=".$event_id." AND startup_id=".$user_id;
 $data = $mysqli->query($sql);
 
 //echo "Here are the bids.</br>\n";
@@ -61,10 +65,10 @@ $data = $mysqli->query($sql);
 //only show submitted bids
 // allow them to accept the bids
 
-function makeAcceptedRow($row, $nickname, $vc) {
+function makeAcceptedRow($row, $startup_name, $vc) {
                 echo "<tr>\n";
                 echo "<td>" . $vc . "</td>\n";
-                echo "<td>" . $nickname . "</td>\n";
+                echo "<td>" . $startup_name . "</td>\n";
                 echo "<td>";
                 echo '$' . number_format($row['price'], 0);
                 echo "</td>\n";
@@ -76,10 +80,10 @@ function makeAcceptedRow($row, $nickname, $vc) {
                 echo "</tr>\n";
 }
 
-function makeRejectedRow($row, $nickname, $vc) {
+function makeRejectedRow($row, $startup_name, $vc) {
                 echo "<tr>\n";
                 echo "<td>" . $vc . "</td>\n";
-                echo "<td>" . $nickname . "</td>\n";
+                echo "<td>" . $startup_name . "</td>\n";
                 echo "<td>";
                 echo '$' . number_format($row['price'], 0);
                 echo "</td>\n";
@@ -91,10 +95,10 @@ function makeRejectedRow($row, $nickname, $vc) {
                 echo "</tr>\n";
 }
 
-function makeCounterRow($row, $nickname, $vc) {
+function makeCounterRow($row, $startup_name, $vc) {
                 echo "<tr>\n";
                 echo "<td>" . $vc . "</td>\n";
-                echo "<td>" . $nickname . "</td>\n";
+                echo "<td>" . $startup_name . "</td>\n";
                 echo "<td>";
                 echo '$' . number_format($row['price'], 0);
                 echo "</td>\n";
@@ -108,10 +112,10 @@ function makeCounterRow($row, $nickname, $vc) {
                 echo "</tr>\n";
 }
 
-function makeSubmittedRow($row, $nickname, $vc) {
+function makeSubmittedRow($row, $startup_name, $vc) {
                 echo "<tr>\n";
                 echo "<td>" . $vc . "</td>\n";
-                echo "<td>" . $nickname . "</td>\n";
+                echo "<td>" . $startup_name . "</td>\n";
                 echo "<td>";
                 echo '$' . number_format($row['price'], 0);
                 echo "</td>\n";
@@ -128,10 +132,10 @@ function makeSubmittedRow($row, $nickname, $vc) {
                 echo "</tr>\n";
 }
 
-function makeDraftRow($row, $nickname, $vc) {
+function makeDraftRow($row, $startup_name, $vc) {
                 echo "<tr>\n";
                 echo "<td>" . $vc . "</td>\n";
-                echo "<td>" . $nickname . "</td>\n";
+                echo "<td>" . $startup_name . "</td>\n";
                 echo "<td>TBD</td>\n";
                 echo "<td>TBD</td>\n";
                 echo "<td>draft</td>\n";
@@ -145,21 +149,21 @@ if ($data->num_rows > 0) {
         echo "<tr><th>VC</th><th>Startup</th><th>Price</th>\n";
         echo "<th>Investment</th><th>Status</th><th>Action</th></tr>\n";
         while ($row=$data->fetch_assoc()){
-		$sql= "SELECT nickname FROM user WHERE name='".$row['vc_name']."'";
+		$sql= "SELECT name FROM user WHERE id=".$row['vc_id'];
 		$vc_query=$mysqli->query($sql);
 		$vc_result=$vc_query->fetch_assoc();
-		$vc_name = $vc_result['nickname'];
+		$vc_name = $vc_result['name'];
 //		echo $vc_name;
 		if ($row['accepted']==1) {
-			makeAcceptedRow($row, $nickname, $vc_name);
+			makeAcceptedRow($row, $startup_name, $vc_name);
 		} elseif ($row['rejected']==1) {
-			makeRejectedRow($row, $nickname, $vc_name);
+			makeRejectedRow($row, $startup_name, $vc_name);
 		} elseif ($row['counter']==1) {
-			makeCounterRow($row, $nickname, $vc_name);
+			makeCounterRow($row, $startup_name, $vc_name);
 		} elseif ($row['submitted']==1) {
-			makeSubmittedRow($row, $nickname, $vc_name);
+			makeSubmittedRow($row, $startup_name, $vc_name);
 		} else {
-			makeDraftRow($row, $nickname, $vc_name);
+			makeDraftRow($row, $startup_name, $vc_name);
 		}
         }
 	echo "</table>\n";
