@@ -40,7 +40,8 @@ if ($user_info['name']!="") {
 
 echo "<h1> Welcome " . $user_name;
 
-$event_query = $mysqli->query("SELECT * FROM event WHERE id=$event_id;");
+$sql="SELECT * FROM event WHERE id=".$event_id;
+$event_query = $mysqli->query($sql);
 $event_info = $event_query->fetch_assoc();
 
 if ($event_info['name'] != "") {
