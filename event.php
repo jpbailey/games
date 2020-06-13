@@ -64,9 +64,7 @@ $sql = "INSERT INTO event (active, name, num_startup, startup_budget,
 //echo $sql."<br>";
 $mysqli->query($sql);
 
-$sql = "SELECT LAST_INSERT_ID()";
-$sql_query=$mysqli->query($sql);
-print_r($sql_query);
+print_r($mysqli->insert_id);
 //$event_id = $mysqli->lastInsertId();
 
 
