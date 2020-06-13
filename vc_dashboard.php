@@ -5,23 +5,23 @@
 
 echo "<h2>VC Dashboard</h2>";
 
-$sql = "SELECT startup_budget FROM event WHERE name='".$event."'";
+$sql = "SELECT startup_budget FROM event WHERE id=".$event_id;
 $sql_query = $mysqli->query($sql);
 $startup_budget=0;
 while ($row = $sql_query->fetch_assoc()) {
         $startup_budget = $row['startup_budget'];
 }
 
-$sql = "SELECT DISTINCT startup_name FROM bid WHERE event_name='".$event."'";
+$sql = "SELECT DISTINCT startup_name FROM bid WHERE id=".$event_id;
 $data = $mysqli->query($sql);
 
 while ($row = $data->fetch_assoc()) {
-	$sql = "SELECT nickname FROM user WHERE name='".$row['startup_name']."'";
+	$sql = "SELECT nickname FROM user WHERE id=".$row['startup_id'];
 	$sql_query = $mysqli->query($sql);
 	$sql_data=$sql_query->fetch_assoc();
         echo $sql_data['nickname']." can still receive ";
-        $sql = "SELECT SUM(investment) FROM bid WHERE startup_name='".
-                $row['startup_name']."' AND accepted=1";
+        $sql = "SELECT SUM(investment) FROM bid WHERE startup_id=".
+                $row['startup_id']." AND accepted=1";
         $sql_query = $mysqli->query($sql);
         $row=$sql_query->fetch_assoc();
         if ($row['SUM(investment)'] != "") {
