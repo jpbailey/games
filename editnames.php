@@ -21,7 +21,7 @@ echo "<table id='gamedata'>";
 echo "<tr><th>name</th>";
 //echo "<th>new name</th>";
 echo "<th>URL</th><th>password</th><th>action</th></tr>\n";
-while ($row=$vc_query->fetch_assoc()) {
+while ($row=$startup_query->fetch_assoc()) {
     $sql = "SELECT * FROM user where id=".$row['startup_id'];
     $user_query=$mysqli->query($sql);
     $user_row=$user_query->fetch_assoc();
