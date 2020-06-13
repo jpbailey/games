@@ -11,18 +11,14 @@
 // form as well as the VC and startup dashboards
 
 // bring in the variables from the previous page
-
-$event=htmlspecialchars($_POST['event']);
-$user=htmlspecialchars($_POST['user']);
-$nickname=htmlspecialchars($_POST['nickname']);
-$password=htmlspecialchars($_POST['password']);
+require ('./variables.php');
 
 // make, check, and authenticate database connection
 require './database.php';
 
 // get the bid data for the event
 
-$sql = "SELECT * FROM event WHERE name='$event';";
+$sql = "SELECT * FROM event WHERE id=".$event_id;
 $event_query = $mysqli->query($sql);
 
 $event_row = $event_query->fetch_assoc();
@@ -31,7 +27,7 @@ echo "<h1>Data from event: ".$event_row['name']."</h1>\n";
 echo "<p style='color:red'>Be sure to refresh this screen so you";
 echo "have accurate data.</p>\n";
 
-$sql = "SELECT * FROM bid WHERE event_name='$event';";
+$sql = "SELECT * FROM bid WHERE event_id=".$event_id;
 $data = $mysqli->query($sql);
 
 $submitted_bids = 0;
@@ -47,7 +43,7 @@ if ($data->num_rows > 0) {
 }
 
 // $sql = "SELECT * FROM bid WHERE event_name='$event' ORDER BY submitted, bid DESC;";
-$sql = "SELECT * FROM bid WHERE event_name='".$event."' ORDER BY 'vc_id'";
+$sql = "SELECT * FROM bid WHERE event_id=".$event_id." ORDER BY 'vc_id'";
 $data = $mysqli->query($sql);
 
 if ($data->num_rows > 0) {
