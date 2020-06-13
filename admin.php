@@ -1,5 +1,5 @@
 <head>
-<title>Get Data</title>
+<title>Administrator</title>
 <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
