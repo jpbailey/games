@@ -39,22 +39,22 @@ if ($action!="newbid") {
 }
 
 function capRoom($id, $mysqli) {
-	$sql = "SELECT vc_name, startup_name, event_name, investment FROM bid where id=$id";
+	$sql = "SELECT vc_id, startup_id, event_id, investment FROM bid where id=".$id;
 	$query = $mysqli->query($sql);
 	$row = $query->fetch_assoc();
-	$vc = $row['vc_name'];
+	$vc = $row['vc_id'];
 	$startup = $row['startup_name'];
-	$event = $row['event_name'];
+	$event = $row['event_id'];
 	$investment = $row['investment'];
-	$sql = "SELECT SUM(investment) FROM bid WHERE vc_name = '".$vc."' AND accepted=1";
+	$sql = "SELECT SUM(investment) FROM bid WHERE vc_id = ".$vc_id." AND accepted=1";
 	$query = $mysqli->query($sql);
 	$row = $query->fetch_assoc();
 	$vc_spent = $row['SUM(investment)'];
-	$sql = "SELECT SUM(investment) FROM bid WHERE startup_name = '".$startup."' AND accepted=1";
+	$sql = "SELECT SUM(investment) FROM bid WHERE startup_id = ".$startup_id." AND accepted=1";
 	$query = $mysqli->query($sql);
 	$row = $query->fetch_assoc();
 	$startup_spent = $row['SUM(investment)'];
-	$sql = "SELECT vc_budget, startup_budget FROM event WHERE name = '".$event."'";
+	$sql = "SELECT vc_budget, startup_budget FROM event WHERE id = ".$event_id;
 	$query = $mysqli->query($sql);
 	$row = $query->fetch_assoc();
 	$vc_budget = $row['vc_budget'];
@@ -148,10 +148,10 @@ if ($action=="submit"){
 } elseif ($action=="newbid") {
 	if ($_POST['investment']<=$remaining && $_POST['startup']!="") {
 		echo "Submitting this bid.<br>";
-		$sql_part1 = "INSERT INTO bid (event_name, vc_name, startup_name, ";
+		$sql_part1 = "INSERT INTO bid (event_id, vc_id, startup_id, ";
 		$sql_part2 = "price, investment, submitted, accepted, rejected, ";
-		$sql_part3 = "counter) VALUES ('".$event."', '".$user."', '";
-		$sql_part4 = $_POST['startup']."', ".$_POST['price'].", ";
+		$sql_part3 = "counter) VALUES (".$event_id.", ".$user_id.", ";
+		$sql_part4 = $_POST['startup_id'].", ".$_POST['price'].", ";
 		$sql_part5 = $_POST['investment'].", 1, 0, 0, 0)";
 		$sql=$sql_part1.$sql_part2.$sql_part3.$sql_part4.$sql_part5;
 		$mysqli->query($sql);

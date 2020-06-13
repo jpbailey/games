@@ -153,7 +153,7 @@ $startup_query = $mysqli->query($sql);
 
 while ($row=$startup_query->fetch_assoc()) {
 	echo "<input type='radio' id=".$row['startup_id']." ";
-	echo "name='startup' value=".$row['startup_id'].">";
+	echo "name='startup_id' value=".$row['startup_id'].">";
 	echo "<label for='".$row['startup_id']."'";
 	echo ">";
 	$sql = "SELECT name FROM user WHERE id=".$row['startup_id'];
