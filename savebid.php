@@ -12,7 +12,7 @@
 require ('./variables.php');
 $price=htmlspecialchars($_POST['price']);
 $investment=htmlspecialchars($_POST['investment']);
-$id=htmlspecialchars($_POST['id']);
+$bid_id=htmlspecialchars($_POST['id']);
 
 // make, check, and authenticate databse connection
 require './database.php';
@@ -24,20 +24,18 @@ $result = $mysqli->query($sql);
 $row=$result->fetch_assoc();
 if ($row['vc']==1) {
 	$updates = "price=".$price.", investment=".$investment;
-	$sql = "UPDATE bid SET ".$updates." WHERE id=".$id;
+	$sql = "UPDATE bid SET ".$updates." WHERE id=".$bid_id;
 	$mysqli->query($sql);
 	echo "<form action='vc.php' method='POST'>";
 } else {
 	$updates = "price=".$price.", investment=".$investment.", counter=1";
-	$sql = "UPDATE bid SET ".$updates." WHERE id=".$id;
+	$sql = "UPDATE bid SET ".$updates." WHERE id=".$bid_id;
 	$mysqli->query($sql);
 	echo "<form action='startup.php' method='POST'>";
 }
 
 echo "<input type=submit name='review_bids' value='review bids'>";
-echo "<input type='hidden' name='event_id' value=$event_id>";
-echo "<input type='hidden' name='user_id' value=$user_id>";
-echo "<input type='hidden' name='password' value=$password>";
+require ('./sendvars.php');
 echo "</form>\n";
 
 
