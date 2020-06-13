@@ -60,11 +60,12 @@ echo  "Amount remaining to invest: $".number_format($remaining, 0).".<br>\n";
 function createRow($row, $mysqli) {
 	echo "<tr>\n";
 	$str_arr = explode (",", $row);
-	$sql = "SELECT name FROM user WHERE name='".$str_arr[1]."'";
-	$sql_query = $mysqli->query($sql);
-	$sql_result = $sql_query->fetch_assoc();
-	echo "<td>".$sql_result['name']."</td>\n";
+//	$sql = "SELECT name FROM user WHERE name='".$str_arr[1]."'";
+//	$sql_query = $mysqli->query($sql);
+//	$sql_result = $sql_query->fetch_assoc();
+//	echo "<td>".$sql_result['name']."</td>\n";
 	$id = $str_arr[0];
+	echo "<td>".$str_arr[1]."</td>\n";
 	echo "<td>";
 	echo '$' . number_format($str_arr[2], 0);
 	echo "</td>\n";
