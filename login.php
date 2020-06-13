@@ -14,7 +14,6 @@
 $event_id=htmlspecialchars($_GET["event_id"]);
 $user_id=htmlspecialchars($_GET["user_id"]);
 
-echo $user_id;
 
 // make and check database connection
 
@@ -29,7 +28,8 @@ if ($mysqli->connect_error) {
 // if there is information about the user and event,
 // retrieve it from the database
 
-$user_query = $mysqli->query("SELECT * FROM user WHERE id=$user_id;");
+$sql="SELECT * FROM user WHERE id=".$user_id;
+$user_query = $mysqli->query($sql);
 $user_info = $user_query->fetch_assoc();
 
 if ($user_info['nickname']!="") {
