@@ -44,7 +44,7 @@ echo "<h2>Design a New Event.</h2>";
 echo "<form action=event.php method='post'>";
 echo "<table id='gamedata'>";
 echo "<tr><td>What is the event name?</td><td>";
-echo "<input type='text' name='event'></td></tr>";
+echo "<input type='text' name='event_name'></td></tr>";
 echo "<tr><td>Please write a brief description of the event:</td><td>";
 echo "<input type='text' name='event_description' size=40></td></tr>";
 echo "<tr><td>How many startups?</td><td>";

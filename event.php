@@ -12,6 +12,7 @@ require ('./environment.php');
 
 // bring in the variables from the previous page
 require ('./variables.php');
+$event_name = htmlspecialchars($_POST['event_name']);
 $num_startup = htmlspecialchars($_POST['num_startup']);
 $startup_budget = htmlspecialchars($_POST['startup_budget']);
 $num_vc = htmlspecialchars($_POST['num_vc']);
@@ -31,7 +32,7 @@ $sql_query = $mysqli->query($sql);
 
 $flag = 0;
 while ($row=$sql_query->fetch_assoc()){
-	if ($row['name']==$event) {
+	if ($row['name']==$event_name) {
 		$flag=1;
 	}
 }
@@ -58,7 +59,7 @@ $user_query = $mysqli->query($sql);
 echo "Creating event: ".$event."</br>\n";
 $sql = "INSERT INTO event (active, name, num_startup, startup_budget,
 	num_vc, vc_budget, start_date,
-	end_date, description) VALUES (1, '".$event."', ".$num_startup.", ".
+	end_date, description) VALUES (1, '".$event_name."', ".$num_startup.", ".
 	$startup_budget.", ".$num_vc.", ".$vc_budget.", '".
 	$start_date."', '".$end_date."', '".
 	$event_description."')";
