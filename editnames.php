@@ -47,9 +47,9 @@ while ($row=$vc_query->fetch_assoc()) {
 }
 echo "</table>\n";
 
-if(isset($_POST['edit_name'])) { 
-    echo "Edit Name has been selected."; 
-} 
+//if(isset($_POST['edit_name'])) { 
+//    echo "Edit Name has been selected."; 
+//} 
 
 ?>
 
