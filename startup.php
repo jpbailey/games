@@ -57,7 +57,7 @@ echo "Amount available to accept: $".number_format($remaining, 0)."<br>\n";
 // need to edit this to allow a starup to accept a bid if
 // they are not over their budget amount
 
-$sql = "SELECT * FROM bid WHERE event_id=".$event_id." AND startup_id=".$user_id."ORDER BY vc_id";
+$sql = "SELECT * FROM bid WHERE event_id=".$event_id." AND startup_id=".$user_id." ORDER BY vc_id";
 echo $sql;
 $data = $mysqli->query($sql);
 
