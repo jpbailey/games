@@ -65,9 +65,9 @@ $data = $mysqli->query($sql);
 //only show submitted bids
 // allow them to accept the bids
 
-function makeAcceptedRow($row, $startup_name, $vc) {
+function makeAcceptedRow($row, $startup_name, $vc_name) {
                 echo "<tr>\n";
-                echo "<td>" . $vc . "</td>\n";
+                echo "<td>" . $vc_name . "</td>\n";
                 echo "<td>" . $startup_name . "</td>\n";
                 echo "<td>";
                 echo '$' . number_format($row['price'], 0);
@@ -80,9 +80,9 @@ function makeAcceptedRow($row, $startup_name, $vc) {
                 echo "</tr>\n";
 }
 
-function makeRejectedRow($row, $startup_name, $vc) {
+function makeRejectedRow($row, $startup_name, $vc_name) {
                 echo "<tr>\n";
-                echo "<td>" . $vc . "</td>\n";
+                echo "<td>" . $vc_name . "</td>\n";
                 echo "<td>" . $startup_name . "</td>\n";
                 echo "<td>";
                 echo '$' . number_format($row['price'], 0);
@@ -95,9 +95,9 @@ function makeRejectedRow($row, $startup_name, $vc) {
                 echo "</tr>\n";
 }
 
-function makeCounterRow($row, $startup_name, $vc) {
+function makeCounterRow($row, $startup_name, $vc_name) {
                 echo "<tr>\n";
-                echo "<td>" . $vc . "</td>\n";
+                echo "<td>" . $vc_name . "</td>\n";
                 echo "<td>" . $startup_name . "</td>\n";
                 echo "<td>";
                 echo '$' . number_format($row['price'], 0);
@@ -112,9 +112,9 @@ function makeCounterRow($row, $startup_name, $vc) {
                 echo "</tr>\n";
 }
 
-function makeSubmittedRow($row, $startup_name, $vc) {
+function makeSubmittedRow($row, $startup_name, $vc_name) {
                 echo "<tr>\n";
-                echo "<td>" . $vc . "</td>\n";
+                echo "<td>" . $vc_name . "</td>\n";
                 echo "<td>" . $startup_name . "</td>\n";
                 echo "<td>";
                 echo '$' . number_format($row['price'], 0);
@@ -132,9 +132,9 @@ function makeSubmittedRow($row, $startup_name, $vc) {
                 echo "</tr>\n";
 }
 
-function makeDraftRow($row, $startup_name, $vc) {
+function makeDraftRow($row, $startup_name, $vc_name) {
                 echo "<tr>\n";
-                echo "<td>" . $vc . "</td>\n";
+                echo "<td>" . $vc_name. "</td>\n";
                 echo "<td>" . $startup_name . "</td>\n";
                 echo "<td>TBD</td>\n";
                 echo "<td>TBD</td>\n";
