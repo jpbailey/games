@@ -98,7 +98,7 @@ function createRow($row, $mysqli) {
 }
 
 // get all of the data for a specific user and event
-$sql = "SELECT * FROM bid WHERE vc_id=".$user_id." AND event_id=".$event_id."ORDER BY startup_id";
+$sql = "SELECT * FROM bid WHERE vc_id=".$user_id." AND event_id=".$event_id." ORDER BY startup_id";
 $biddata_query=$mysqli->query($sql);
 
 // put all of the data into an array
