@@ -108,7 +108,7 @@ $biddata_query=$mysqli->query($sql);
 if ($biddata_query->num_rows > 0) {
 	$ARRAY=array();
 	while ($row=$biddata_query->fetch_assoc()){
-		$array_row = $row['id'].",".$row['startup_name'].",".
+		$array_row = $row['id'].",".$row['startup_id'].",".
 			$row['price'].",".$row['investment'].",".
 			$row['submitted'].",".$row['accepted'].",".
 			$row['rejected'].",".$row['counter'].",0";
