@@ -115,7 +115,7 @@ foreach ($vc_array as $vc) {
 }
 
 //go back to control panel
-echo "<form action='controlpanel.php'>\n";
+echo "<form action=controlpanel.php method='post'>\n";
 echo "<input type='submit' name='control' value='Return to Control Panel'>\n";
 require ('./sendvars.php');
 echo "</form>";
