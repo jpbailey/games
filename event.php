@@ -117,8 +117,7 @@ foreach ($vc_array as $vc) {
 //go back to control panel
 echo "<form action='controlpanel.php'>\n";
 echo "<input type='submit' name='control' value='Return to Control Panel'>\n";
-echo "<input type='hidden' name='user_id' value=$user_id\n";
-echo "<input type='hidden' name='password' value=$password>\n";
+require ('./sendvars.php');
 echo "</form>";
 
 ?>

@@ -79,7 +79,7 @@ echo "</table>\n";
 <input type='submit' name='action' value='Administratpr Panel'>
 
 <?php
-require ('./sendvars.php')
+require ('./sendvars.php');
 ?>
 
 <input type='hidden' name='role' value='vc'>
