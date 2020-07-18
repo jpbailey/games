@@ -7,7 +7,7 @@
 <?php
 
 // this code will allow the startup to see all of the bids
-// and allow them to accept them
+// and allow them to accept them and make counteroffers
 
 // bring in environment
 require ('./environment.php');
