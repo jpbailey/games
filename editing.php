@@ -17,10 +17,15 @@ require ('./environment.php');
 require ('./variables.php');
 
 // make, check, and authenticate database connection
-//require ('./database.php');
+require ('./database.php');
 
 // use the database to bring in the values associated with the
 // current bid information
+
+$sql = "SELECT name FROM user WHERE user_id=".$user_id;
+$user_query = $mysqli->query($sql);
+$user_row=$user_query->fetch_assoc();
+echo $user_row['name'];
 
 echo "did it pass along the variables?";
 
