@@ -26,7 +26,7 @@ require ('./database.php');
 // use the database to bring in the values associated with the
 // current bid information
 
-$sql = "SELECT name FROM user WHERE id=".edit_id;
+$sql = "SELECT name FROM user WHERE id=".$edit_id;
 echo $sql;
 
 //$user_query = $mysqli->query($sql);
