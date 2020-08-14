@@ -27,9 +27,11 @@ require ('./database.php');
 // current bid information
 
 $sql = "SELECT name FROM user WHERE id=".edit_id;
-$user_query = $mysqli->query($sql);
-$user_row=$user_query->fetch_assoc();
-echo $user_row['name'];
+echo $sql;
+
+//$user_query = $mysqli->query($sql);
+//$user_row=$user_query->fetch_assoc();
+//echo $user_row['name'];
 
 echo "did it pass along the variables?";
 
