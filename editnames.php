@@ -27,7 +27,7 @@ while ($row=$startup_query->fetch_assoc()) {
     $user_row=$user_query->fetch_assoc();
     echo "<tr>";
     echo "<td>".$user_row['name'];
-    echo "edit button";
+    echo "<input type='submit' name='action' value='edit'>";
     echo "</td>";
 //    echo "<td><input type=text name='newname' value='".$user_row['name']."'>";
 //    echo "<input type='submit' name='edit_name' value='save'></td>";
