@@ -27,13 +27,16 @@ require ('./database.php');
 // current bid information
 
 $sql = "SELECT name FROM user WHERE id=".$edit_id;
-//echo $sql;
-
 $user_query = $mysqli->query($sql);
 $user_row=$user_query->fetch_assoc();
-echo $user_row['name'];
+echo "current name:  ".$user_row['name'];
 
-echo "did it pass along the variables?";
+echo "<form action='newname.php' method='POST'>";
+echo "<input type='text' name='newname' value='".$user_row['name']."'>";
+echo "<input type='submit' name='action' value='edit'>";
+echo "<input type='hidden' name='edit_id' value=".$row['startup_id'].">";
+require ('./sendvars.php');
+echo "</form>";
 
 ?>
 
