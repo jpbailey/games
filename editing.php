@@ -18,7 +18,7 @@ require ('./variables.php');
 
 $edit_id=htmlspecialchars($_POST['edit_id']);
 
-echo $edit_id;
+//echo $edit_id;
 
 // make, check, and authenticate database connection
 require ('./database.php');
@@ -27,11 +27,11 @@ require ('./database.php');
 // current bid information
 
 $sql = "SELECT name FROM user WHERE id=".$edit_id;
-echo $sql;
+//echo $sql;
 
-//$user_query = $mysqli->query($sql);
-//$user_row=$user_query->fetch_assoc();
-//echo $user_row['name'];
+$user_query = $mysqli->query($sql);
+$user_row=$user_query->fetch_assoc();
+echo $user_row['name'];
 
 echo "did it pass along the variables?";
 
