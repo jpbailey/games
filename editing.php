@@ -31,17 +31,19 @@ $user_query = $mysqli->query($sql);
 $user_row=$user_query->fetch_assoc();
 echo "current name:  ";
 echo $user_row['name'];
-echo "<p>";
+echo "<p>\n";
 
-echo "new name:";
+echo "This functionality needs to be added still";
 
-echo "<form action='newname.php' method='POST'>";
-echo "<input type='text' name='newname' value='".$user_row['name']."'>";
-echo "<br>";
-echo "<input type='submit' name='action' value='submit name change'>";
-echo "<input type='hidden' name='edit_id' value=".$row['startup_id'].">";
-require ('./sendvars.php');
-echo "</form>";
+//echo "new name:";
+
+//echo "<form action='newname.php' method='POST'>";
+//echo "<input type='text' name='newname' value='".$user_row['name']."'>";
+//echo "<br>";
+//echo "<input type='submit' name='action' value='submit name change'>";
+//echo "<input type='hidden' name='edit_id' value=".$row['startup_id'].">";
+//require ('./sendvars.php');
+//echo "</form>";
 
 ?>
 
