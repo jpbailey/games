@@ -16,7 +16,7 @@ require ('./environment.php');
 // bring in variables
 require ('./variables.php');
 
-//$edit_id=htmlspecialchars($_POST['edit_id']);
+$edit_id=htmlspecialchars($_POST['edit_id']);
 
 echo $edit_id;
 
