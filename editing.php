@@ -29,10 +29,15 @@ require ('./database.php');
 $sql = "SELECT name FROM user WHERE id=".$edit_id;
 $user_query = $mysqli->query($sql);
 $user_row=$user_query->fetch_assoc();
-echo "current name:  ".$user_row['name'];
+echo "current name\br";
+echo $user_row['name'];
+echo "\br";
+
+echo "new name\br";
 
 echo "<form action='newname.php' method='POST'>";
 echo "<input type='text' name='newname' value='".$user_row['name']."'>";
+echo "\br";
 echo "<input type='submit' name='action' value='edit'>";
 echo "<input type='hidden' name='edit_id' value=".$row['startup_id'].">";
 require ('./sendvars.php');
