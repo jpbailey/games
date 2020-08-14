@@ -16,7 +16,7 @@ require ('./environment.php');
 // bring in variables
 require ('./variables.php');
 
-$edit_id=htmlspecialchars($_POST['edit_id']);
+//$edit_id=htmlspecialchars($_POST['edit_id']);
 
 echo $edit_id;
 
@@ -26,10 +26,10 @@ require ('./database.php');
 // use the database to bring in the values associated with the
 // current bid information
 
-//$sql = "SELECT name FROM user WHERE id=".edit_id;
-//$user_query = $mysqli->query($sql);
-//$user_row=$user_query->fetch_assoc();
-//echo $user_row['name'];
+$sql = "SELECT name FROM user WHERE id=".edit_id;
+$user_query = $mysqli->query($sql);
+$user_row=$user_query->fetch_assoc();
+echo $user_row['name'];
 
 echo "did it pass along the variables?";
 
