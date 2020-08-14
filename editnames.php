@@ -29,6 +29,7 @@ while ($row=$startup_query->fetch_assoc()) {
     echo "<td>".$user_row['name'];
     echo "<form action='editing.php' method='POST'>";
     echo "<input type='submit' name='action' value='edit'>";
+    require ('./sendvars.php');
     echo "</form>";
     echo "</td>";
 //    echo "<td><input type=text name='newname' value='".$user_row['name']."'>";

@@ -11,10 +11,10 @@
 // to the previous submitbid.php page
 
 // set the environment
-//require ('./environment.php');
+require ('./environment.php');
 
 // bring in variables
-//require ('./variables.php');
+require ('./variables.php');
 
 // make, check, and authenticate database connection
 //require ('./database.php');
@@ -22,9 +22,7 @@
 // use the database to bring in the values associated with the
 // current bid information
 
-echo "got here";
-
-echo "what about here";
+echo "did it pass along the variables?";
 
 ?>
 
