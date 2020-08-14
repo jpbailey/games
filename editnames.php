@@ -26,7 +26,8 @@ while ($row=$startup_query->fetch_assoc()) {
     $user_query=$mysqli->query($sql);
     $user_row=$user_query->fetch_assoc();
     echo "<tr>";
-    echo "<td>".$user_row['name']."</td>";
+    echo "<td>".$user_row['name'];
+    echo "</td>";
 //    echo "<td><input type=text name='newname' value='".$user_row['name']."'>";
 //    echo "<input type='submit' name='edit_name' value='save'></td>";
     $startup_url = "http://digitalplatformgames.com/games/login.php?event_id=".$event_id."&user_id=".$user_row['id'];
