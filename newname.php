@@ -44,8 +44,9 @@ echo "new name is: ".$newname."<p>";
 // no sql injections here!
 
 $sql = "UPDATE user SET name='".$newname."' WHERE id=".$edit_id;
+$clean_sql = $mysqli->prepare($sql);
 
-echo $sql;
+echo $clean_sql;
 //$mysqli->query($sql);
 
 echo "<form action='editnames.php' method='POST'>";
