@@ -33,17 +33,17 @@ echo "current name:  ";
 echo $user_row['name'];
 echo "<p>\n";
 
-echo "This functionality needs to be added still";
+//echo "This functionality needs to be added still";
 
-//echo "new name:";
+echo "new name:";
 
-//echo "<form action='newname.php' method='POST'>";
-//echo "<input type='text' name='newname' value='".$user_row['name']."'>";
-//echo "<br>";
-//echo "<input type='submit' name='action' value='submit name change'>";
-//echo "<input type='hidden' name='edit_id' value=".$row['startup_id'].">";
-//require ('./sendvars.php');
-//echo "</form>";
+echo "<form action='newname.php' method='POST'>";
+echo "<input type='text' name='newname' value='".$user_row['name']."'>";
+echo "<br>";
+echo "<input type='submit' name='action' value='submit name change'>";
+echo "<input type='hidden' name='edit_id' value=".$row['startup_id'].">";
+require ('./sendvars.php');
+echo "</form>";
 
 ?>
 
