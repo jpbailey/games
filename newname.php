@@ -40,10 +40,17 @@ echo $user_row['name'];
 echo "current name is: ".$user_row['name']."<p>";
 echo "new name is: ".$newname."<p>";
 
+// check to make sure new name is sql compliant
+// no sql injections here!
 
-echo "<form action='admin.php' method='POST'>";
+$sql = "UPDATE user SET name='".$newname."' WHERE id=".$edit_id;
+
+echo $sql;
+//$mysqli->query($sql);
+
+echo "<form action='editnames.php' method='POST'>";
 echo "<input type='submit' name='action' value='back to edit names'>";
-require ('./editnames.php');
+require ('./sendvars.php');
 echo "</form>";
 
 ?>
