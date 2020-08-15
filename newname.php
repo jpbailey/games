@@ -19,11 +19,6 @@ require ('./variables.php');
 $edit_id=htmlspecialchars($_POST['edit_id']);
 $newname=htmlspecialchars($_POST['newname']);
 
-echo $edit_id;
-echo $newname;
-
-//echo $edit_id;
-
 // make, check, and authenticate database connection
 require ('./database.php');
 
@@ -33,10 +28,6 @@ require ('./database.php');
 $sql = "SELECT name FROM user WHERE id=".$edit_id;
 $user_query = $mysqli->query($sql);
 $user_row=$user_query->fetch_assoc();
-//echo "current name:  ";
-echo $user_row['name'];
-//echo "<p>\n";
-
 echo "current name is: ".$user_row['name']."<p>";
 echo "new name is: ".$newname."<p>";
 
