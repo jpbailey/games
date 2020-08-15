@@ -30,17 +30,20 @@ require ('./database.php');
 // use the database to bring in the values associated with the
 // current bid information
 
-//$sql = "SELECT name FROM user WHERE id=".$edit_id;
-//$user_query = $mysqli->query($sql);
-//$user_row=$user_query->fetch_assoc();
+$sql = "SELECT name FROM user WHERE id=".$edit_id;
+$user_query = $mysqli->query($sql);
+$user_row=$user_query->fetch_assoc();
 //echo "current name:  ";
-//echo $user_row['name'];
+echo $user_row['name'];
 //echo "<p>\n";
+
+echo "current name is: ".$user_row['name']."<p>";
+echo "new name is: ".$newname."<p>";
 
 
 echo "<form action='admin.php' method='POST'>";
-echo "<input type='submit' name='action' value='back to admin panel'>";
-require ('./sendvars.php');
+echo "<input type='submit' name='action' value='back to edit names'>";
+require ('./editnames.php');
 echo "</form>";
 
 ?>
